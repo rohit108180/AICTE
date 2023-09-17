@@ -9,6 +9,7 @@ const Navigation =(props)=> {
     try{  
     const response = await axios.post("http://localhost:4000/user/logout")
       setLogin(false)
+      localStorage.removeItem('token');
       navigate("/", { replace: true });
     }catch(err){
       console.log(err)
@@ -19,6 +20,8 @@ const Navigation =(props)=> {
          <nav className="navbar navbar-expand-lg navbar-dark bg-dark nav-back fixed-top">
            <div className="navbar-nav">
            <Link className="nav-item nav-link " to="/Dashboard">Home </Link>
+           <Link className="nav-item nav-link " to="/Profile">Profile </Link>
+           
               <span style={{position: 'absolute',right: 0}}>
               <button style={{border:0}} className="nav-item nav-link bg-dark" onClick={Logout}>Logout </button>
               </span>

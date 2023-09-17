@@ -30,6 +30,12 @@ var UserSchema = new mongoose.Schema({
       default: "",
     },
 
+    designation :{
+      type: String,
+      trim: true,
+      default: "",
+    },
+
     profilePicture: {
       url : String,
       public_id: String,

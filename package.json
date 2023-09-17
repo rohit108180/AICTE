@@ -12,7 +12,9 @@
     "mongoose": "^6.2.2",
     "nodemon": "^2.0.15"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.6"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server --ignore client",

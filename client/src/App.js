@@ -13,6 +13,7 @@ import Main from "./Documents/Main"
 import { AuthProvider } from "./Context/AuthProvider";
 
 import { v4 as uuidV4 } from "uuid"
+import { Profile } from "./pages/Profile"
 
 function App() {
 
@@ -23,9 +24,11 @@ function App() {
        <Routes>
         <Route path="/" element={<Login />}/>
         <Route path="/Register" element={<Register />}/>
+        
         <Route element={<ProtectedRoute />}>
         <Route  element={<Navigation />}>
           <Route path="/Dashboard" element={<Repositories/>}/>
+          <Route path="/Profile" element={<Profile/>}/>
           <Route path="/:Title" element={<Main />}/>
           <Route path="/Edit/:Title" element={<TextEditor />}/>
         </Route>
