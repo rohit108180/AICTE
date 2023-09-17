@@ -78,6 +78,12 @@ export default function Repositories() {
     <div class="container" style={{ height: 700, width: "100%", padding: 20 }}>
       <div class="col d-flex justify-content-end">
         {}
+        <div class="greet">
+          {" "}
+          <div class="greeting"> Hey User, </div>
+          <div class="sub-greeting"> Here's your progress</div>
+        </div>
+
         <button
           class="curriculum-btn"
           type="button"
@@ -86,6 +92,7 @@ export default function Repositories() {
         >
           + New Course
         </button>
+
         {isOpen && (
           <Popup
             content={

@@ -16,6 +16,30 @@ body {
   border: 1px solid #1e7c83;
   background: #dfeced;
 }
+.greet {
+  position: relative;
+  left: -560px;
+}
+.greeting {
+  color: #000;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 5px;
+}
+.sub-greeting {
+  color: #1e7c83;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 5px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
 .popup-submit {
   width: 142px;
   height: 50px;
