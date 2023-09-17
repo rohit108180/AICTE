@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -8,6 +8,17 @@ function Login() {
     axios.defaults.withCredentials = true;
     const[Email,setEmail]=useState('')
     const[Password,setPassword]=useState('')
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token === "Logged IN") {
+            setLogin(true);
+            navigate("/Dashboard", { replace: true });
+        }
+    }
+    , [])
+
     const navigate = useNavigate()
     const handleSubmit=async (e) =>{
         e.preventDefault();
@@ -18,6 +29,7 @@ function Login() {
         const data = response.data
         if(data=="Logged in"){
             setLogin(true)
+            localStorage.setItem('token' , "Logged IN");
             navigate("/Dashboard", { replace: true });
         }
         else{
