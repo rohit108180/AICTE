@@ -1,13 +1,14 @@
-var express = require("express");
-var cookieParser = require("cookie-parser");
-var mongoose = require("mongoose");
-var cors = require("cors");
-var user = require("./Routes/User");
-var repos = require("./Routes/Repos")
-var versions = require("./Routes/Version")
-var {getUser} = require("./Middleware/User")
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const user = require("./Routes/User");
+const repos = require("./Routes/Repos")
+const versions = require("./Routes/Version")
+const resources = require("./Routes/Resources")
+const {getUser} = require("./Middleware/User")
 
-var app = express();
+const app = express();
 app.use(cors({origin:'http://localhost:3000',credentials:true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -16,6 +17,7 @@ app.use(cookieParser());
 app.use("/user", user);
 app.use("/repos",getUser,repos);
 app.use("/version",getUser,versions);
+app.use("/resources", getUser, resources);
 
 const start = async () => {
   try {
