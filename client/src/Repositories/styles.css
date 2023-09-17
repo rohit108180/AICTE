@@ -1,12 +1,41 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #F3F3F3;
-  margin: 0; 
+  background-color: #f3f3f3;
+  margin: 0;
 }
-.btn.btn-primary.button{
+.curriculum-btn {
+  width: 286px;
+  height: 77px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid #1e7c83;
+  background: #dfeced;
+}
+.popup-submit {
+  width: 142px;
+  height: 50px;
+  flex-shrink: 0;
+  color: #dfeced;
+  background-color: #1e7c83;
+  stroke-width: 1px;
+  stroke: #1e7c83;
+  border: #dfeced;
+  border-radius: 6px;
+}
+.subhead {
+  color: #000;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.btn.btn-primary.button {
   width: 200px;
   padding: 10px;
   align-self: center;
@@ -21,7 +50,7 @@ body {
   min-height: 11in;
   padding: 1in;
   margin: 1rem;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   background-color: white;
 }
 
@@ -37,11 +66,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   border: none;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
-
 
 /* Popup style */
 .popup-box {
@@ -83,8 +111,6 @@ body {
   font-size: 20px;
 }
 
-
-
 @page {
   margin: 1in;
 }
@@ -106,7 +132,7 @@ body {
   .container .ql-toolbar.ql-snow {
     display: none;
   }
-  .btn{
+  .btn {
     display: none;
   }
 }
