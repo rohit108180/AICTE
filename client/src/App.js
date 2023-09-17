@@ -14,11 +14,35 @@ import { AuthProvider } from "./Context/AuthProvider";
 
 import { v4 as uuidV4 } from "uuid"
 import { Profile } from "./pages/Profile"
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function App() {
 
+
+  // src/theme.js
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1E7C83', // Your primary color
+    },
+    secondary: {
+      main: '#DFECED', // Your secondary color
+    },
+  },
+  typography: {
+    fontFamily: 'Arial, sans-serif', // Your preferred font family
+  },
+});
+
+
+
+
+
   return (
     <Router>
+      <ThemeProvider theme={theme}>
       <AuthProvider>
 
        <Routes>
@@ -36,6 +60,7 @@ function App() {
         <Route path="*"element={<Navigate to="/" />}/>
        </Routes>
        </AuthProvider>
+       </ThemeProvider>
     </Router>
   )
 }

@@ -17,7 +17,7 @@ const Navigation =(props)=> {
     }
         return (
             <>
-         <nav className="navbar navbar-expand-lg navbar-dark bg-dark nav-back fixed-top">
+         <nav className="navbar navbar-expand-lg navbar-dark bg-dark nav-back ">
            <div className="navbar-nav">
            <Link className="nav-item nav-link " to="/Dashboard">Home </Link>
            <Link className="nav-item nav-link " to="/Profile">Profile </Link>
@@ -27,7 +27,7 @@ const Navigation =(props)=> {
               </span>
             </div>
         </nav >
-        <div className='all'style={{  marginTop: 100}} >
+        <div className='all' >
          
         <Outlet/>
         </div>
