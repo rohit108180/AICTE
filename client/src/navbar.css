@@ -1,0 +1,34 @@
+.navbar{
+    background-color: var(--secondary-color);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    /* box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75); */
+  }
+
+  .navlink{
+
+    text-decoration: none;
+    color: #1E7C83;
+    transition: all 0.1s ease-in-out;
+    margin: 0 10px;
+  }
+
+  .loggedin{
+    color: white;
+  }
+
+  .navlink:hover{
+    color: #46afb0;
+    transform: scale(1.2);
+  }
+
+  .loggedin:hover{
+    color: white;
+    transform: scale(1.2);
+  }
+
+
+  

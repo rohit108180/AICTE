@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+/* define css variables for theam colors */
+:root{
+  --primary-color: #1E7C83;
+  --secondary-color: #DFECED;
+  --font-size-medium: 16px;
+}
 
 .App {
   text-align: center;
@@ -10,6 +14,7 @@
   height: 40vmin;
   pointer-events: none;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -29,7 +29,7 @@ function Login() {
         const data = response.data
         if(data=="Logged in"){
             setLogin(true)
-            localStorage.setItem('token' , "Logged IN");
+            // localStorage.setItem('token' , "Logged IN");
             navigate("/Dashboard", { replace: true });
         }
         else{
