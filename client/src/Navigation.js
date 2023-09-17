@@ -41,7 +41,7 @@ const Navigation =(props)=> {
            
            <Link className=" navlink" to="/Profile">Analytics </Link>
            
-           <Link className=" navlink" to="/Profile">Resources </Link>
+           <Link className=" navlink" to="/Resources">Resources </Link>
            
            <Link className=" navlink" to="/Profile">Dashboard </Link>
            </div>
@@ -62,7 +62,7 @@ const Navigation =(props)=> {
         
         <Link className=" navlink loggedin" to="/Profile">Analytics </Link>
         
-        <Link className=" navlink loggedin" to="/Profile">Resources </Link>
+        <Link className=" navlink loggedin" to="/Resources">Resources </Link>
         
         <Link className=" navlink loggedin" to="/Profile">Dashboard </Link>
         </div>

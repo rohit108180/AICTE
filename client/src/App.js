@@ -16,6 +16,7 @@ import { v4 as uuidV4 } from "uuid"
 import { Profile } from "./pages/Profile/Profile"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Landing } from "./pages/LandingPage/Landing"
+import Resources from "./Resources/Resources"
 
 function App() {
 
@@ -47,15 +48,15 @@ const theme = createTheme({
       <AuthProvider>
 
        <Routes>
-       <Route  element={<Navigation />}>
-        <Route path="/" element={<Landing />}/> 
+       <Route element={<Navigation />}>
+        <Route path="/"element={<Landing />}/> 
         <Route path="/login" element={<Login />}/>
         <Route path="/Register" element={<Register />}/>
         
         <Route element={<ProtectedRoute />}>
-   
           <Route path="/Dashboard" element={<Repositories/>}/>
           <Route path="/Profile" element={<Profile/>}/>
+          <Route path="/Resources" element={<Resources/>}/>
           <Route path="/:Title" element={<Main />}/>
           <Route path="/Edit/:Title" element={<TextEditor />}/>
         </Route>
