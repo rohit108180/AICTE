@@ -2,6 +2,14 @@ import React, { useState,useEffect } from "react";
 import axios from "axios";
 import Popup from "./Popup";
 import { useNavigate } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
+
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+
+import img from '../assests/landingimage2.png'
 export default function Repositories() {
 const[Repos,setRepos]=useState([])
 const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +34,7 @@ useEffect(()=>{
 
 const handleUpdate=async (id)=>{
   setUpdate(true)
-  const  response = await axios.get(`http://localhost:4000/Repos/${id}`);
+  const  response = await axios.get(`http://localhost:5000/Repos/${id}`);
   const updating= await response.data
   setid(updating._id)
   setTitle(updating.Title)
@@ -38,7 +46,7 @@ const AddRepo = async (e) => {
   if (Title != "" && Desc != "") 
   {
   if(update==true){
-    await axios.put(`http://localhost:4000/Repos/${id}`, {
+    await axios.put(`http://localhost:5000/Repos/${id}`, {
       Title,
       Desc
       });
@@ -49,7 +57,7 @@ const AddRepo = async (e) => {
     togglePopup();
   }
   else{
-     await axios.post("http://localhost:4000/Repos/add", {
+     await axios.post("http://localhost:5000/Repos/add", {
       Title,
       Desc
       });
@@ -65,12 +73,12 @@ const AddRepo = async (e) => {
     }
   }
 const getData=async()=>{
-  const response = await axios.get("http://localhost:4000/Repos/view")
+  const response = await axios.get("http://localhost:5000/Repos/view")
   setRepos(response.data)
 
 }
 const Delete=async(id)=>{
-  await axios.delete(`http://localhost:4000/Repos/${id}`)
+  await axios.delete(`http://localhost:5000/Repos/${id}`)
   getData()
 }
 
@@ -79,7 +87,8 @@ const Versions =(Repo)=>{
 }
 
   return(
-    <div class="container" style={{ height: 700, width: "100%", padding: 20 }}>
+    <>
+    {/* <div class="container" style={{ height: 700, width: "100%", padding: 20 }}>
 
     <div class="col d-flex justify-content-end">
       {}
@@ -168,8 +177,105 @@ const Versions =(Repo)=>{
             })}      
           </tbody>
       </table>
+    </div> */}
+
+    <div>
+      <div className="topPartRepo">
+        <div className="userInfo">
+            <h1>Hey Rohit,</h1>
+            <Typography  variant ="h4" color="primary">Here's your progress</Typography>
+        </div>
+
+        <Button variant="outlined"><span className="addnewRepo" onClick={togglePopup}
+    >
+       + New Curriculum</span></Button>
+      </div>
+
+
+      <div className="sectionRepo">
+        <div className="section-headingRepo">
+          <Typography variant="h4" > Unfinished Curriculum</Typography>
+        </div>
+        <div className="repo-cards">
+        {Repos.map((Repo) => {
+              return (
+        <Card sx={{ maxWidth: 400, margin:"2rem", padding:"2rem", border : "1px solid #1E7C83", }}
+
+        key={Repo._id}
+        >
+     
+      <CardContent >
+        <Typography gutterBottom variant="h4" component="div">
+          {Repo.Title}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          {Repo.Desc}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button variant="contained"
+                onClick ={()=>{Versions(Repo)}}
+       >Edit</Button>
+        <Button variant= "outlined" 
+        
+        onClick={()=>{handleUpdate(Repo._id)}}>Update</Button>
+      </CardActions>
+    </Card>)})}
+
+        </div>
+      </div>
     </div>
-    )
+
+    {isOpen && (
+            <Popup
+              content={
+                <>
+                  <h4 style={{ textAlign: "center", marginBottom: 30 }}>
+                    Repository Detail
+                  </h4>
+                  <form onSubmit={AddRepo}>
+                    <div class="row">
+                      <div class="mb-3 col col-10">
+                        <label for="course-code" class="form-label">
+                          Repository name
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="course-code"
+                          value={Title}
+                          onChange={(e) => setTitle(e.target.value)}
+                        />
+                      </div>
+                      </div>
+                      <div class="mb-3 col col-10">
+                        <label for="course-name" class="form-label">
+                          Description
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="course-name"
+                          value={Desc}
+                          onChange={(e) => setDesc(e.target.value)}
+                        />
+                      </div>
+
+                    <input
+                      type="submit"
+                      name="submit"
+                      value="Submit"
+                      className=" btn btn-primary ms-auto me-0 me-md-3 my-2 my-md-0"
+                    />
+                  </form>
+                </>
+              }
+              handleClose={handleCloseX}
+            />
+          )}
+
+    </>
+  )
 
 }
 
