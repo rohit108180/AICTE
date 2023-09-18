@@ -4,11 +4,14 @@ module.exports.get = async (req, res) => {
   try {
     const user = req.user;
     if (!user) return await res.status(401).json("Unauthorized");
+    const degree = req.query.degree;
     const department = req.query.department;
-    const subject = req.query.subject;
+    const course = req.query.course;
     const filterObj = {};
+    if (degree) filterObj.Degree = degree;
     if (department) filterObj.Department = department;
-    if (subject) filterObj.Subject = subject;
+    if (course) filterObj.Course = course;
+    console.log(filterObj);
     const resources = await Resource.find(filterObj);
     await res.status(200).json(resources);
   } catch (err) {

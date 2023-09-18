@@ -67,26 +67,29 @@ function ResourceCard({ resource }) {
   const name = resource.Name;
   const about = resource.About;
   const authors = resource.Authors;
+  const department = resource.Department;
   return (
     <Card
       variant="outlined"
       sx={{
         maxWidth: "500px",
-        paddingTop: 5,
+        paddingTop: 2,
         paddingBottom: 5,
         paddingLeft: 2,
         paddingRight: 2,
         border: "1px solid #1E7C83",
         borderRadius: 2,
-        background: "transparent",
       }}
     >
       <CardContent>
+        <Typography style={{ color: "#1E7C83" }} fontWeight="bold">
+          {department}
+        </Typography>
         <Typography variant="h4" fontWeight="bold">
           {name}
         </Typography>
-        <Typography style={{ color: "#1E7C83" }}>{authors}</Typography>
-        <Typography sx={{ fontSize: 18, mt: 3, ml: 3, mr: 10 }}>
+        <Typography style={{ color: "#1E7C83" }}>By: {authors}</Typography>
+        <Typography style={{ fontSize: 18 }} sx={{ mt: 3, ml: 3, mr: 10 }}>
           {about}
         </Typography>
       </CardContent>
@@ -171,10 +174,10 @@ export default function Resources() {
           dropdownHandle={makeDropdownHandle("degree")}
         />
         <Dropdown
-          name={"Branch"}
-          value={filter["branch"] ? filter["branch"] : ""}
+          name={"Department"}
+          value={filter["department"] ? filter["department"] : ""}
           options={brOptions}
-          dropdownHandle={makeDropdownHandle("branch")}
+          dropdownHandle={makeDropdownHandle("department")}
         />
         <Dropdown
           name={"Course"}
