@@ -4,6 +4,10 @@ const ResourceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  About: {
+    type: String,
+    required: true
+  },
   Authors: {
     type: String,
     required: true,
@@ -12,7 +16,11 @@ const ResourceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Subject: {
+  Degree : {
+    type: String,
+    required: true
+  },
+  Course: {
     type: String,
     required: true,
   },

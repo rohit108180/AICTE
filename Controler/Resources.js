@@ -23,13 +23,17 @@ module.exports.post = async (req, res) => {
     const name = req.body.Name;
     const authors = req.body.Authors;
     const department = req.body.Department;
-    const subject = req.body.Subject;
+    const course = req.body.Course;
     const driveLink = req.body.DriveLink;
+    const about = req.body.About;
+    const degree = req.body.Degree;
     const newResource = new Resource({
       Name: name,
+      About: about,
       Authors: authors,
       Department: department,
-      Subject: subject,
+      Degree: degree,
+      Course: course,
       DriveLink: driveLink,
     });
     const savedResource = await newResource.save();

@@ -10,6 +10,9 @@ import {
   CardContent,
   InputLabel,
 } from "@mui/material";
+import axios from "axios";
+const API_URL = "http://localhost:5000";
+
 function Dropdown({ name, value, dropdownHandle, options }) {
   return (
     <Box>
@@ -26,7 +29,7 @@ function Dropdown({ name, value, dropdownHandle, options }) {
           style={{
             color: "#1E7C83",
             fontSize: 24,
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           {name}
@@ -40,7 +43,7 @@ function Dropdown({ name, value, dropdownHandle, options }) {
           sx={{
             fontSize: 26,
             textAlign: "center",
-            borderRadius: 2
+            borderRadius: 2,
           }}
         >
           {options.map((option, i) => {
@@ -60,7 +63,10 @@ function Dropdown({ name, value, dropdownHandle, options }) {
   );
 }
 
-function ResourceCard({ name, content }) {
+function ResourceCard({ resource }) {
+  const name = resource.Name;
+  const about = resource.About;
+  const authors = resource.Authors;
   return (
     <Card
       variant="outlined"
@@ -79,8 +85,9 @@ function ResourceCard({ name, content }) {
         <Typography variant="h4" fontWeight="bold">
           {name}
         </Typography>
+        <Typography style={{ color: "#1E7C83" }}>{authors}</Typography>
         <Typography sx={{ fontSize: 18, mt: 3, ml: 3, mr: 10 }}>
-          {content}
+          {about}
         </Typography>
       </CardContent>
     </Card>
@@ -121,28 +128,22 @@ export default function Resources() {
     setFilter(newFilterObj);
   }, [searchParams]);
 
+  useEffect(() => {
+    (async () => {
+      const newResources = await axios.get(API_URL + "/resources", {
+        params: {
+          ...filter,
+        },
+      });
+      setResources(newResources.data);
+    })();
+  }, [filter]);
   // Resources
-  const [resources, setResources] = useState([
-    {
-      name: "Software Engineering",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nobis quis consequuntur nemo magnam maiores harum praesentium repellendus deserunt animi.",
-    },
-    {
-      name: "Software Engineering",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nobis quis consequuntur nemo magnam maiores harum praesentium repellendus deserunt animi.",
-    },
-    {
-      name: "Software Engineering",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nobis quis consequuntur nemo magnam maiores harum praesentium repellendus deserunt animi.",
-    },
-  ]);
+  const [resources, setResources] = useState([]);
 
   // Component
   return (
-    <Box ml={20} mr={20} mt={10}>
+    <Box ml={20} mr={20} mt={10} mb={10}>
       <Box>
         <Typography variant="h3" component="h1" fontWeight="bold">
           Repository
@@ -194,13 +195,13 @@ export default function Resources() {
           alignContent: "flex-start",
         }}
       >
-        {resources.map((resource, index) => (
-          <ResourceCard
-            name={resource.name}
-            content={resource.content}
-            key={resource.name + index}
-          />
-        ))}
+        {resources ? (
+          resources.map((resource, index) => (
+            <ResourceCard resource={resource} key={resource.name + index} />
+          ))
+        ) : (
+          <></>
+        )}
       </Box>
     </Box>
   );
