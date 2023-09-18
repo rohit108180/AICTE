@@ -201,21 +201,21 @@ export default function Repositories() {
                 <Card
                   sx={{
                     width: 400,
-                    height: 400,
+                    height: 450,
                     // maxWidth: 400,
                     margin: "2rem",
                     padding: "2rem",
                     border: "1px solid #1E7C83",
-                    overflow: "scroll",
+                    // overflow: "scroll",
                   }}
                   key={Repo._id}
                 >
                   <CardContent>
-                    <Typography gutterBottom variant="h4" component="div">
+                    <Typography sx= {{height:150}} gutterBottom variant="h4" component="div">
                       {Repo.Title}
                     </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      {Repo.Desc}
+                    <Typography sx={{height:150}} variant="body1" color="text.secondary">
+                      {Repo.Desc.length > 200 ? Repo.Desc.substring(0, 200) +"..." : Repo.Desc}
                     </Typography>
                   </CardContent>
                   <CardActions>
