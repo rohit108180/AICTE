@@ -59,7 +59,10 @@ export const initialState = {
             const res = await axios.post(`${BASE_URL}/user/${action}`, currentUser);
             console.log(res);
             const {user, token} =  res.data;
+            console.log(user, token);
             dispatch({type : SETUP_USER_SUCCESS, payload : {user, token}});
+
+            console.log(`${action} successful`);
             displayAlert(`successfully ${action}. Redirecting ....`, "success");
 
             addUsertoLocalStorage({user, token});

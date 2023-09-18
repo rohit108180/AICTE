@@ -18,7 +18,12 @@ module.exports.Register = async (req, res) => {
     const newu = await users.create({ name,Email, Password: newPassword, role });
 
     console.log(newu);
-    await res.status("201").json(newu);
+    const AccessTokens = createjwts(newu,"Access key" ,"1d");
+
+    console.log(AccessTokens)
+    newu.password = undefined;
+    res.status(201).json({ user: newu, token :AccessTokens });
+
   } catch (err) {
     res.status("400").json(err);
   }
@@ -36,23 +41,23 @@ module.exports.Login = async (req, res) => {
     const match =  await bcrypt.compare(Password,user.Password);
     if (!match) return res.status("203").json("password dose not exist");
     const AccessTokens = createjwts(user,"Access key" ,"1d");
-    const RefreshTokens = createjwts(user,"Refersh Key" ,"10m");    
-    res.cookie("AccessTokens", AccessTokens, {
-      MaxAge: 10000,
-      sameSite:true,
-      secure:true,
-      httpOnly:true
-    });
-    res.cookie("RefreshTokens", RefreshTokens, {
-      MaxAge: 600000,
-      sameSite:true,
-      secure:true,
-      httpOnly:true
-    });
+    // const RefreshTokens = createjwts(user,"Refersh Key" ,"10m");    
+    // res.cookie("AccessTokens", AccessTokens, {
+    //   MaxAge: 10000,
+    //   sameSite:true,
+    //   secure:true,
+    //   httpOnly:true
+    // });
+    // res.cookie("RefreshTokens", RefreshTokens, {
+    //   MaxAge: 600000,
+    //   sameSite:true,
+    //   secure:true,
+    //   httpOnly:true
+    // });
     
     console.log("logged in")
 
-    console.log(AccessTokens,RefreshTokens)
+    console.log(AccessTokens)
     user.password = undefined;
     res.status(200).json({ user, token :AccessTokens });
 

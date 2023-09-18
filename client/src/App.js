@@ -18,6 +18,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Landing } from "./pages/LandingPage/Landing"
 import Resources from "./Resources/Resources"
 import { AppProvider } from "./Context/context/appContext"
+import SingIn from "./Login Signup/SingIn"
+import SignUp from "./Login Signup/SignUp"
 
 function App() {
 
@@ -51,8 +53,8 @@ const theme = createTheme({
        <Routes>
        <Route element={<Navigation />}>
         <Route path="/"element={<Landing />}/> 
-        <Route path="/login" element={<Login />}/>
-        <Route path="/Register" element={<Register />}/>
+        <Route path="/login" element={<SingIn />}/>
+        <Route path="/Register" element={<SignUp/>}/>
         
         <Route element={<ProtectedRoute />}>
           <Route path="/Dashboard" element={<Repositories/>}/>
