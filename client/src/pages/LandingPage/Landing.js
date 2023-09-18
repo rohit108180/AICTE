@@ -20,7 +20,7 @@ export const Landing = () => {
     useEffect(() => {
         if(user){
       
-            navigate('/Dashboard');
+            // navigate('/Dashboard');
             setLogin(true);
       
         }
