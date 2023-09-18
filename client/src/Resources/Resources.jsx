@@ -1,30 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   Select,
   FormControl,
   Box,
-  InputLabel,
   MenuItem,
   Typography,
   Card,
   CardContent,
+  InputLabel,
 } from "@mui/material";
 function Dropdown({ name, value, dropdownHandle, options }) {
   return (
-    <Box sx={{ minWidth: 250}}>
-      <FormControl fullWidth>
-        <InputLabel id={name + "-st1"}>{name}</InputLabel>
+    <Box>
+      <FormControl
+        fullWidth
+        sx={{
+          minWidth: 300,
+          backgroundColor: "#DFECED",
+          textAlign: "center",
+        }}
+      >
+        <InputLabel
+          id={name + "-st1"}
+          style={{
+            color: "#1E7C83",
+            fontSize: 24,
+            fontWeight: "bold"
+          }}
+        >
+          {name}
+        </InputLabel>
         <Select
           id={name + "-st"}
-          labelId={name + "-st1"}
           value={value}
-          onChange={dropdownHandle}
           label={name}
+          labelId={name + "-st1"}
+          onChange={dropdownHandle}
+          sx={{
+            fontSize: 26,
+            textAlign: "center",
+            borderRadius: 2
+          }}
         >
           {options.map((option, i) => {
             return (
               <MenuItem key={option + i} value={option}>
-                <Typography sx={{ fontSize: 18 }}>{option}</Typography>
+                <Typography
+                  style={{ fontSize: 24, fontWeight: "bold", color: "#1E7C83" }}
+                >
+                  {option}
+                </Typography>
               </MenuItem>
             );
           })}
@@ -33,38 +59,67 @@ function Dropdown({ name, value, dropdownHandle, options }) {
     </Box>
   );
 }
+
 function ResourceCard({ name, content }) {
   return (
-    <Card variant="outlined" sx={{ maxWidth: "400px", padding: 5 }}>
+    <Card
+      variant="outlined"
+      sx={{
+        maxWidth: "500px",
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 2,
+        paddingRight: 2,
+        border: "1px solid #1E7C83",
+        borderRadius: 2,
+        background: "transparent",
+      }}
+    >
       <CardContent>
-        <Typography variant="h4" component="h3">
+        <Typography variant="h4" fontWeight="bold">
           {name}
         </Typography>
-        <Typography sx={{ fontSize: 18 }}>{content}</Typography>
+        <Typography sx={{ fontSize: 18, mt: 3, ml: 3, mr: 10 }}>
+          {content}
+        </Typography>
       </CardContent>
     </Card>
   );
 }
+
 export default function Resources() {
   // Filter and Options
+  const [filter, setFilter] = useState({});
+  const [searchParams, setSearchParams] = useSearchParams();
   const [degOptions, setDegOptions] = useState(["B.Tech", "M.Tech", "BBA"]);
-  const [degFilter, setDegFilter] = useState("");
   const [brOptions, setBrOptions] = useState([
     "Computer Science And Engineering",
     "Mechanical Engineering",
     "Course",
   ]);
-  const [brFilter, setBrFilter] = useState("");
   const [crOptions, setCrOptions] = useState([
     "Introduction to Programming",
     "Operating Systems",
   ]);
-  const [crFilter, setCrFilter] = useState("");
-  const makeDropdownHandle = (value, setValue) => {
+
+  // Utility
+  const makeDropdownHandle = (name) => {
     return (event) => {
-      setValue(event.target.value);
+      // add required search param
+      const newSearchParams = { ...filter };
+      newSearchParams[name] = event.target.value;
+
+      // set
+      setSearchParams(newSearchParams);
     };
   };
+
+  // Initial Stuff
+  useEffect(() => {
+    const newFilterObj = {};
+    searchParams.forEach((value, key) => (newFilterObj[key] = value));
+    setFilter(newFilterObj);
+  }, [searchParams]);
 
   // Resources
   const [resources, setResources] = useState([
@@ -87,12 +142,12 @@ export default function Resources() {
 
   // Component
   return (
-    <Box className="rs-contain" ml={20} mr={20} mt={10}>
-      <Box className="rs-top">
-        <Typography variant="h4" component="h4" fontWeight="bold">
+    <Box ml={20} mr={20} mt={10}>
+      <Box>
+        <Typography variant="h3" component="h1" fontWeight="bold">
           Repository
         </Typography>
-        <Typography variant="h6" component="text">
+        <Typography fontSize={28} mt={2} color="#1E7C83" maxWidth="550px">
           Find here all the latest books, research papers and curricular updates
         </Typography>
       </Box>
@@ -100,41 +155,43 @@ export default function Resources() {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-around",
-          maxWidth: "1200px",
-          gap: 20,
+          justifyContent: "space-evenly",
           margin: "0 auto",
           marginTop: 10,
+          gap: 5,
+          flexWrap: "wrap",
+          alignContent: "flex-start",
         }}
       >
         <Dropdown
           name={"Degree"}
-          value={degFilter}
+          value={filter["degree"] ? filter["degree"] : ""}
           options={degOptions}
-          dropdownHandle={makeDropdownHandle(degFilter, setDegFilter)}
+          dropdownHandle={makeDropdownHandle("degree")}
         />
         <Dropdown
           name={"Branch"}
-          value={brFilter}
+          value={filter["branch"] ? filter["branch"] : ""}
           options={brOptions}
-          dropdownHandle={makeDropdownHandle(brFilter, setBrFilter)}
+          dropdownHandle={makeDropdownHandle("branch")}
         />
         <Dropdown
           name={"Course"}
-          value={crFilter}
+          value={filter["course"] ? filter["course"] : ""}
           options={crOptions}
-          dropdownHandle={makeDropdownHandle(crFilter, setCrFilter)}
+          dropdownHandle={makeDropdownHandle("course")}
         />
       </Box>
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
+          justifyContent: "space-evenly",
           margin: "0 auto",
           marginTop: 10,
-          gap: 10,
+          gap: 5,
           flexWrap: "wrap",
+          alignContent: "flex-start",
         }}
       >
         {resources.map((resource, index) => (
