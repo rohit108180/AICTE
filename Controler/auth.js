@@ -1,6 +1,8 @@
 var users = require("../Models/Users");
 var bcrypt = require("bcrypt");
 var { createjwts} = require("../Utils/JWTs");
+
+var { v2  } = require("cloudinary");
 module.exports.Register = async (req, res) => {
   try {
     const { name,  Email, Password, role } = req.body;
@@ -66,6 +68,61 @@ module.exports.Login = async (req, res) => {
     res.status(400).json(err);
   }
 };
+
+
+module.exports.UpdateUser = async (req, res) => {
+  console.log(req.body);
+
+  let updatedUser = req.body;
+
+  if (updatedUser.profilePhoto) {
+
+    console.log("comming in this");
+
+    v2.config({
+      cloud_name: "diiehbal5",
+      api_key: "766823617577317",
+      api_secret: "dMQA7mUrL75ET6L9OKegUIEH3n0",
+    });
+    
+    const result = await v2.uploader.upload(
+      updatedUser.profilePhoto,
+      {
+        folder: "ScholarSphere/profilePicture",
+        width: 150,
+        crop: "scale",
+      },
+      function (error) {
+        if (error) {
+          console.log(error);
+          res.status(400).json({ error });
+        }
+      }
+    );
+
+    delete updatedUser.profilePhoto;
+
+    console.log("the new result", result);
+
+    updatedUser.profilePicture = {
+      public_id: result.public_id,
+      url: result.secure_url,
+    };
+
+  }
+  const result1 = await users.updateOne(
+    { _id: updatedUser._id },
+    { $set: updatedUser }
+  );
+  updatedUser.password = undefined;
+  // Check if the user was found and updated successfully
+  if (result1.matchedCount === 1 && result1.modifiedCount === 1) {
+    res.status(200).json({ user: updatedUser });
+  } else {
+    res.status(404).send("User not found");
+  }
+};
+
 module.exports.Logout =async(req,res)=>{
   const user = req.user
   if(!user) return res.status("401").json("unAutherized")

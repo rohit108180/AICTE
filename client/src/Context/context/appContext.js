@@ -162,7 +162,7 @@ export const initialState = {
     const updateProfile = async(currentUser)=>{
         startLoading();
         try {
-            const res  = await axios.patch(`${BASE_URL}/api/v1/auth/updateUser`, currentUser);
+            const res  = await axios.patch(`${BASE_URL}/user/updateUser`, currentUser);
 
             dispatch({type:UPDATE_PROFILE, payload: {user: res.data.user}})
             displayAlert("Successfully updated", "success")
