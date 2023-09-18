@@ -41,10 +41,8 @@ var UserSchema = new mongoose.Schema({
       public_id: String,
     },
     role: {
-      type: Number,      
+      type: String,      
       required: true,
-      enum: [0, 1, 2], // 0 for administartor, 1 for curriculum designer, 2 for educatior
-
     },
     projects: [{ type: Schema.Types.ObjectId, ref: "Repositories" }],
     
