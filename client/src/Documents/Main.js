@@ -24,14 +24,14 @@ useEffect(()=>{
 
 const getData=async()=>{
 console.log(_id)
-  const response = await axios.get(`http://localhost:4000/version/all/${state.Repo._id}`)
+  const response = await axios.get(`http://localhost:5000/version/all/${state.Repo._id}`)
   setVersion(response.data)
   if(response.data.length>0){
   getContent(response.data)}
 }
 const getContent=async(array)=>{
     const obj = array[array.length - 1] 
-    const response = await axios.get(`http://localhost:4000/version/${obj._id}`)
+    const response = await axios.get(`http://localhost:5000/version/${obj._id}`)
     console.log(response.data)
     setContent(response.data.Content)
   }
@@ -40,7 +40,7 @@ const getContent=async(array)=>{
     navigate(`/Edit/${state.Repo.Title}`, { state: { Repo:state.Repo } })    
   }  
 const getCon = async(id)=>{
-    const response = await axios.get(`http://localhost:4000/version/${id}`)
+    const response = await axios.get(`http://localhost:5000/version/${id}`)
     setContent(response.data.Content)
   
 } 

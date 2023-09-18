@@ -29,7 +29,7 @@ export default () => {
   const [savedText, setSavedText] = useState(Content);
   const handleSubmit = async(e) => {
     e.preventDefault()
-    await axios.post('http://localhost:4000/version/add',{
+    await axios.post('http://localhost:5000/version/add',{
       Repository:_id,
       Content:savedText
     })
