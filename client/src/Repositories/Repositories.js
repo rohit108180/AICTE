@@ -26,7 +26,7 @@ useEffect(()=>{
 
 const handleUpdate=async (id)=>{
   setUpdate(true)
-  const  response = await axios.get(`http://localhost:4000/Repos/${id}`);
+  const  response = await axios.get(`http://localhost:5000/Repos/${id}`);
   const updating= await response.data
   setid(updating._id)
   setTitle(updating.Title)
@@ -38,7 +38,7 @@ const AddRepo = async (e) => {
   if (Title != "" && Desc != "") 
   {
   if(update==true){
-    await axios.put(`http://localhost:4000/Repos/${id}`, {
+    await axios.put(`http://localhost:5000/Repos/${id}`, {
       Title,
       Desc
       });
@@ -49,7 +49,7 @@ const AddRepo = async (e) => {
     togglePopup();
   }
   else{
-     await axios.post("http://localhost:4000/Repos/add", {
+     await axios.post("http://localhost:5000/Repos/add", {
       Title,
       Desc
       });
@@ -65,12 +65,12 @@ const AddRepo = async (e) => {
     }
   }
 const getData=async()=>{
-  const response = await axios.get("http://localhost:4000/Repos/view")
+  const response = await axios.get("http://localhost:5000/Repos/view")
   setRepos(response.data)
 
 }
 const Delete=async(id)=>{
-  await axios.delete(`http://localhost:4000/Repos/${id}`)
+  await axios.delete(`http://localhost:5000/Repos/${id}`)
   getData()
 }
 
