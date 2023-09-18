@@ -1,12 +1,30 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import secondaryImage from '../../assests/landingimage2.png'
 
 import coverImage from '../../assests/landingCoverImage.png'
 import './Landing.css'
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../MyHooks/useAuth";
+import { useAppcontext } from '../../Context/context/appContext';
+
 import Card from '../../Components/Card'
 import CardComponent from '../../Components/Card'
 
 export const Landing = () => {
+    
+    const { setLogin } = useAuth();
+    const {  user} = useAppcontext();
+
+    const navigate = useNavigate();
+      
+    useEffect(() => {
+        if(user){
+      
+            navigate('/Dashboard');
+            setLogin(true);
+      
+        }
+      }, [user, navigate])
   return (
     <div style={{marginTop: "60px"}}>
       <div className='topPart'>

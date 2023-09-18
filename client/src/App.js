@@ -17,6 +17,7 @@ import { Profile } from "./pages/Profile/Profile"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Landing } from "./pages/LandingPage/Landing"
 import Resources from "./Resources/Resources"
+import { AppProvider } from "./Context/context/appContext"
 
 function App() {
 
@@ -46,7 +47,7 @@ const theme = createTheme({
     <Router>
       <ThemeProvider theme={theme}>
       <AuthProvider>
-
+      <AppProvider>
        <Routes>
        <Route element={<Navigation />}>
         <Route path="/"element={<Landing />}/> 
@@ -63,7 +64,9 @@ const theme = createTheme({
         </Route>
         <Route path="*"element={<Navigate to="/" />}/>
        </Routes>
+       </AppProvider>
        </AuthProvider>
+
        </ThemeProvider>
     </Router>
   )

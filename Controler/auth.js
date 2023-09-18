@@ -23,6 +23,8 @@ module.exports.Register = async (req, res) => {
     res.status("400").json(err);
   }
 };
+
+
 module.exports.Login = async (req, res) => {
   try {
 
@@ -32,9 +34,8 @@ module.exports.Login = async (req, res) => {
     console.log(user);
     if (!user) return res.status("404").json("user dose not exist");
     const match =  await bcrypt.compare(Password,user.Password);
-    console.log("logged in")
     if (!match) return res.status("203").json("password dose not exist");
-    const AccessTokens = createjwts(user,"Access key" ,"10s");
+    const AccessTokens = createjwts(user,"Access key" ,"1d");
     const RefreshTokens = createjwts(user,"Refersh Key" ,"10m");    
     res.cookie("AccessTokens", AccessTokens, {
       MaxAge: 10000,
@@ -48,10 +49,16 @@ module.exports.Login = async (req, res) => {
       secure:true,
       httpOnly:true
     });
+    
+    console.log("logged in")
 
-    res.status('200').json('Logged in');
+    console.log(AccessTokens,RefreshTokens)
+    user.password = undefined;
+    res.status(200).json({ user, token :AccessTokens });
+
+    console.log("login user");
   } catch (err) {
-    res.status("400").json(err);
+    res.status(400).json(err);
   }
 };
 module.exports.Logout =async(req,res)=>{

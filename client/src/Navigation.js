@@ -5,22 +5,21 @@ import useAuth from './MyHooks/useAuth';
 
 import "./navbar.css"
 import { Button } from '@mui/material';
+import { useAppcontext } from './Context/context/appContext';
 const Navigation =(props)=> {
   const navigate = useNavigate()  
   const { setLogin ,Login} = useAuth();
+  
+  const {logoutUser} = useAppcontext()
 
 
   const handleClick =async()=>{
 
     if(Login){
-        try{  
-        const response = await axios.post("http://localhost:4000/user/logout")
-          setLogin(false)
-          localStorage.removeItem('token');
-          navigate("/", { replace: true });
-        }catch(err){
-          console.log(err)
-        }
+        logoutUser();
+        setLogin(false)
+        navigate("/", { replace: true });
+
       }
       else{
         navigate("/login",{replace:true}

@@ -31,7 +31,7 @@ export const initialState = {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const BASE_URL = "http://localhost:5000";
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
 
@@ -50,10 +50,13 @@ export const initialState = {
 
 
     const setupUser = async(currentUser, action) =>{
+        console.log("currentUser", currentUser);
+        console.log("action", action);
+
         dispatch({type : SETUP_USER_BEGINS});
         try {
             
-            const res = await axios.post(`${BASE_URL}/api/v1/auth/${action}`, currentUser);
+            const res = await axios.post(`${BASE_URL}/user/${action}`, currentUser);
             console.log(res);
             const {user, token} =  res.data;
             dispatch({type : SETUP_USER_SUCCESS, payload : {user, token}});

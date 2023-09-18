@@ -22,8 +22,8 @@ app.use("/resources", getUser, resources);
 const start = async () => {
   try {
     await mongoose.connect("mongodb+srv://rohit108180:R320101r@aicte-sih.6c2ucnm.mongodb.net/");
-    app.listen(process.env.PORT || 4000, () =>
-      console.log("Listening on port 4000")
+    app.listen(process.env.PORT || 5000, () =>
+      console.log("Listening on port 5000")
     );
   } catch (error) {
     console.log(error);
