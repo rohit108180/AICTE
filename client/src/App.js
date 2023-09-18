@@ -14,6 +14,10 @@ import { AuthProvider } from "./Context/AuthProvider";
 
 import { v4 as uuidV4 } from "uuid"
 import { Profile } from "./pages/Profile"
+import SingIn from "./Login Signup/SingIn"
+import { SiGnuprivacyguard } from "react-icons/si"
+import SignUp from "./Login Signup/SignUp"
+
 
 function App() {
 
@@ -22,8 +26,8 @@ function App() {
       <AuthProvider>
 
        <Routes>
-        <Route path="/" element={<Login />}/>
-        <Route path="/Register" element={<Register />}/>
+        <Route path="/" element={<SingIn />}/>
+        <Route path="/Register" element={<SignUp />}/>
         
         <Route element={<ProtectedRoute />}>
         <Route  element={<Navigation />}>
