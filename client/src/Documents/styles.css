@@ -14,6 +14,8 @@ body {
   position: absolute;
   left: 43%;
   margin-right: -58%;
+  background-color: #1E7C83;
+  border: 1px solid #1E7C83;
 }
 
 .container .ql-editor {
@@ -83,7 +85,16 @@ body {
   font-size: 20px;
 }
 
+/* .versionNumber {
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: rgb(30, 124, 131);
+}
 
+.versionNumber:hover {
+  background-color: rgb(30, 124, 131);
+  color: white;
+} */
 
 @page {
   margin: 1in;
