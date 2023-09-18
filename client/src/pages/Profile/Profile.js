@@ -8,30 +8,74 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Button, Chip, TextField } from '@mui/material'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { useAppcontext } from '../../Context/context/appContext';
 
 export const Profile = () => {
 
-    const [profile, setProfile] = useState({
-        name: 'Rohit Sharma',
-        email: 'rohit@gmail.com',
-        designation: 'Proffeessor',
-        profileImage: '',
-        role : '0',
-        githubLink: 'asdfasdfasd',
-        googleScholarProfileLink: 'adfadfasdf',
-        linkedIn: 'dfadsfasdfasf',
-        userBio: 'As a student of Computer Science and Engineering at Netaji Subhas University of Technology, I am constantly seeking opportunities to enhance my skills and stay up-to-date with the latest developments in the field of technology. My passion for technology is evident in my experience as a MERN stack web developer, where I have honed my skills in creating scalable and robust web applications. I am not just a tech enthusiast, but also a problem solver who enjoys tackling complex challenges and finding creative solutions.',
-        specializations: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MongoDB"],
-        institute: 'Netaji Subhas University of Technology',
-    })
+    const {user, updateProfile}  =useAppcontext();
+    const [avatarPreview, setAvatarPreview2] = useState(undefined);
+    // const [profile, setProfile] = useState({
+    //     name: 'Rohit Sharma',
+    //     email: 'rohit@gmail.com',
+    //     designation: 'Proffeessor',
+    //     profileImage: '',
+    //     role : '0',
+    //     githubLink: 'asdfasdfasd',
+    //     googleScholarProfileLink: 'adfadfasdf',
+    //     linkedIn: 'dfadsfasdfasf',
+    //     userBio: 'As a student of Computer Science and Engineering at Netaji Subhas University of Technology, I am constantly seeking opportunities to enhance my skills and stay up-to-date with the latest developments in the field of technology. My passion for technology is evident in my experience as a MERN stack web developer, where I have honed my skills in creating scalable and robust web applications. I am not just a tech enthusiast, but also a problem solver who enjoys tackling complex challenges and finding creative solutions.',
+    //     specializations: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MongoDB"],
+    //     institute: 'Netaji Subhas University of Technology',
+    // })
+
+    const [profile, setProfile] = useState({...user});
+
+    // setProfile(user);
+
+    console.log(profile);
 
 
     
 
-    const onChange=(e)=>{
-        console.log(e.target.value);
-        setProfile({...profile, [e.target.name]: e.target.value})
-    }
+    const onChange=(event)=>{
+    
+            if (event.target.name === "profileImage") {
+              const reader = new FileReader();
+        
+              reader.onload = () => {
+                if (reader.readyState === 2) {
+                  console.log("read image", reader.result);
+                  setAvatarPreview2(reader.result);
+        
+                  const newState = {
+                    ...profile,
+                    profilePhoto: reader.result,
+                  };
+        
+                  console.log(newState);
+        
+                  setProfile(newState);
+                  console.log("setted state", newState);
+                }
+              };
+        
+              reader.readAsDataURL(event.target.files[0]);
+            } else {
+              setProfile({
+                ...profile,
+                [event.target.name]: event.target.value,
+              });
+            }
+          };
+        
+    const handleSubmit = (event) => {
+        console.log("updateProfile")
+        event.preventDefault();
+        updateProfile(profile);
+        setAvatarPreview2(null);
+        console.log(profile);
+      };
+    
 
   return (
     <div className='profileContainer'>
@@ -39,7 +83,7 @@ export const Profile = () => {
 
             <div className='top'>
             <div className='profileImage rounded-full'>
-                <img src='https://www.w3schools.com/howto/img_avatar.png' alt='profile'/>
+                <img src ={profile?.profilePicture?.url} alt='profile'/>
 
             </div>
             
@@ -49,11 +93,11 @@ export const Profile = () => {
             </div>
             <div className='socials'> 
                
-                <a href='https://www.linkedin.com/'><LinkedInIcon/></a>
-                <a href='https://www.github.com/'>
+                <a href={profile.linkedIn} target="_blank"><LinkedInIcon/></a>
+                <a href ={profile.githubLink} target ="_blank">
                 <GitHubIcon/>
                 </a>
-                <a href='https://www.google.com/'>
+                <a href={profile.googleScholarProfileLink} target ="_blank">
                 <SiGooglescholar/>
                 </a>
             </div>
@@ -67,34 +111,41 @@ export const Profile = () => {
         </div>
         <div className='right'>
             <div style={{display:'flex', flexDirection:"column", width:"60%", paddingTop: "5rem"}}>
+
+                <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
             <TextField
-                // fullWidth
+                fullWidth
                 id="name"
                 label="Name"
                 name='name'
-                value={profile.name}
+                value={profile?.name}
                 onChange={onChange}
                 margin='normal'
+                // width="100%"
+                style ={{marginRight : "1rem"}}
             /> 
             <TextField
                 // fullWidth
                 id="email"
                 label="Email"
                 name='email'
-                value={profile.email}
+                value={profile?.Email}
                 onChange={onChange}
                 disabled
                 margin='normal'
             />
+            </div>
 
         <TextField
           id="outlined-textarea"
-          label="Multiline Placeholder"
+          label="Bio"
           placeholder="Placeholder"
-          value={profile.userBio}
+          value={profile?.userBio}
+          name='userBio'
           onChange={onChange}
           multiline
           margin='normal'
+          min-height="100px"
         />
 
         {/* designation */}
@@ -103,7 +154,7 @@ export const Profile = () => {
                 id="designation"
                 label="Designation"
                 name='designation'
-                value={profile.designation}
+                value={profile?.designation}
                 onChange={onChange}
                 margin='normal'
             /> 
@@ -113,7 +164,7 @@ export const Profile = () => {
                 id="institute"
                 label="Institute"
                 name='institute'
-                value={profile.institute}
+                value={profile?.institute}
                 onChange={onChange}
                 margin='normal'
             /> 
@@ -130,10 +181,30 @@ export const Profile = () => {
                 margin='normal'
             /> 
 
+                <label>Profile Image </label>
+                      <div>
+                      <input
+                        name="profileImage"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => onChange(e)}
+                      ></input>
+                      </div>
+
+                      {avatarPreview && (
+                        <img
+                          alt="Profile Image"
+                          src={avatarPreview}
+                          width="100%"
+                          padding="10px"
+                          margin="10px"
+                        ></img>
+                      )}
+
         <div>
-        {profile.specializations.map((skill)=>{
+        {/* {profile?.specializations.map((skill)=>{
             return <Chip label={skill} margin='10px' />
-        })}
+        })} */}
         </div>
 
         {/* github Profile */}
@@ -142,7 +213,7 @@ export const Profile = () => {
                 id="githubLink"
                 label="Github Profile"
                 name='githubLink'
-                value={profile.githubLink}
+                value={profile?.githubLink}
                 onChange={onChange}
                 margin='normal'
             /> 
@@ -152,7 +223,7 @@ export const Profile = () => {
                 id="googleScholarProfileLink"
                 label="Google Scholar Profile"
                 name='googleScholarProfileLink'
-                value={profile.googleScholarProfileLink}
+                value={profile?.googleScholarProfileLink}
                 onChange={onChange}
                 margin='normal'
             /> 
@@ -162,13 +233,13 @@ export const Profile = () => {
                 id="linkedIn"
                 label="LinkedIn"
                 name='linkedIn'
-                value={profile.linkedIn}
+                value={profile?.linkedIn}
                 onChange={onChange}
                 margin='normal'
             /> 
         {/* instagram */}
 
-        <Button  className = "bookmark" variant="contained"  >Update</Button>
+        <Button onClick={handleSubmit} className = "bookmark" variant="contained"  >Update</Button>
 
         </div>
 
