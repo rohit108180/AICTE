@@ -59,7 +59,10 @@ export const initialState = {
             const res = await axios.post(`${BASE_URL}/user/${action}`, currentUser);
             console.log(res);
             const {user, token} =  res.data;
+            console.log(user, token);
             dispatch({type : SETUP_USER_SUCCESS, payload : {user, token}});
+
+            console.log(`${action} successful`);
             displayAlert(`successfully ${action}. Redirecting ....`, "success");
 
             addUsertoLocalStorage({user, token});
@@ -109,6 +112,8 @@ export const initialState = {
    
         try {
         startLoading();
+
+      
         const res  = await axios.get(`${BASE_URL}/api/v1/post`);
         let data  = res.data.posts
 
@@ -159,7 +164,7 @@ export const initialState = {
     const updateProfile = async(currentUser)=>{
         startLoading();
         try {
-            const res  = await axios.patch(`${BASE_URL}/api/v1/auth/updateUser`, currentUser);
+            const res  = await axios.patch(`${BASE_URL}/user/updateUser`, currentUser);
 
             dispatch({type:UPDATE_PROFILE, payload: {user: res.data.user}})
             displayAlert("Successfully updated", "success")

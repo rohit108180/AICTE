@@ -42,7 +42,7 @@ export default () => {
       <div  className="container">  
       <ReactQuill  modules={modules} theme="snow" value={savedText} onChange={(html)=>setSavedText(html)}  />
       </div>
-      <input type='submit' name="submit" value="Commit" className="btn btn-primary button" />
+      <input type='submit' name="submit" value="Commit" className="btn btn-primary button" style={{marginBottom: "20px"}}/>
     </form>
   );
 };

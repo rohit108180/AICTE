@@ -21,7 +21,7 @@ module.exports.Add= async (req,res)=>{
         await res.status("400").json(err)
     }
 }
-module.exports.ViewAll= async (req,res)=>{
+module.exports.View= async (req,res)=>{
     try{    
         const user = req.user
         if(!user) return res.status("401").json("unAutherized")      
@@ -33,6 +33,21 @@ module.exports.ViewAll= async (req,res)=>{
         await res.status("400").json(err)
     }
 }
+
+
+module.exports.ViewAll= async (req,res)=>{
+    try{    
+        const user = req.user
+        if(!user) return res.status("401").json("unAutherized")      
+        const Repo = await Repodoc.find() 
+        console.log("Repo",Repo)
+        await res.status("200").json(Repo)
+    }
+    catch(err){
+        await res.status("400").json(err)
+    }
+}
+
 module.exports.ViewOne= async (req,res)=>{
     try{    
         const user = req.user

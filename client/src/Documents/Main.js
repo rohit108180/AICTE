@@ -3,9 +3,14 @@ import axios from "axios";
 import Popup from "./Popup";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+
+import {useAppcontext} from "../Context/context/appContext";
 
 export default function Main() {
   const { state } = useLocation();
+  const {user} = useAppcontext(); 
   const { _id, Title, Desc, User } = state.Repo;
   const [Version, setVersion] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -50,22 +55,87 @@ export default function Main() {
     const response = await axios.get(`http://localhost:5000/version/${id}`);
     setContent(response.data.Content);
   };
+
+
+  const Delete = async (id) => {
+    await axios.delete(`http://localhost:5000/Repos/${id}`);
+    getData();
+  };
+
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
+  
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+  }
+
   return (
     <div
       className="container"
-      style={{ height: 700, width: "100%", padding: 20 }}
+      style={{  width: "100%", padding: "5rem", filter: "blur(5)"}}
     >
-      <div className="col d-flex justify-content-end">
-        <Button variant="contained" onClick={togglePopup}>
-          Versions
-        </Button>
-        <Button variant="outlined" onClick={Edit}>
-          Edit
-        </Button>
+      <div className="col d-flex" style={{justifyContent: "space-between"}}>
+        <div>
+          <div className="col d-flex justify-content-end">
+            <h3>Collaborators</h3>
+          </div>
+          <Stack direction="row" spacing={2} className="col d-flex justify-content-end"
+            style={{marginBottom: "2rem"}}
+          >
+            <Avatar {...stringAvatar('Kent Dodds')} />
+            <Avatar {...stringAvatar('Jed Watson')} />
+            <Avatar {...stringAvatar('Tim Neutkens')} />
+          </Stack>
+        </div>
+        <div>
+          <Button variant="contained" onClick={togglePopup}>
+            Versions
+          </Button>
+          &nbsp;&nbsp;
+
+          {
+            user._id === User &&
+            <>
+          <Button variant="outlined" onClick={Edit}>
+            Edit
+          </Button>
+          <Button variant="outlined" color="error" onClick={() => Delete(_id)}>
+            Delete
+          </Button>
+          </>
+          }
+        </div>
+      </div>
+
+      <div>
+        
+        
       </div>
 
       {isOpen && (
-        <Popup
+        <Popup style={{zIndex: "1"}}
           content={
             <>
               <h4 style={{ textAlign: "center", marginBottom: 30 }}>
@@ -82,9 +152,12 @@ export default function Main() {
                     return (
                       <tr scope="row" key={Repo._id}>
                         <td onClick={() => getCon(Repo._id)}>
-                          Version: {index + 1}
+                          <div className="col d-flex justify-content-center">
+                            <Button variant="contained" className="versionNumber">Version: {index + 1}</Button>
+                          </div>
                         </td>
-                        <td>{Repo.Desc}</td>
+                        {console.log(Repo.Desc)}
+                        {/* <td>{Repo.Desc}</td> */}
                       </tr>
                     );
                   })}
@@ -95,7 +168,12 @@ export default function Main() {
           handleClose={handleCloseX}
         />
       )}
-      <div dangerouslySetInnerHTML={{ __html: Content }}></div>
+      <div style={{backgroundColor :"white", padding:"5rem", border: "2px Solid #1E7C83", borderRadius: "10px"}}>
+        <div className="col d-flex justify-content-center">
+          <h1 style= {{marginBottom:"5rem"}}>{Title}</h1>
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: Content }}></div>
+      </div>
     </div>
   );
 }

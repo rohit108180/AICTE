@@ -34,15 +34,15 @@ const Navigation =(props)=> {
          <nav className="">
            <div className="navbar" style={{display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"row", width :"100%" }}>
             <div  style={{display:"flex", flexDirection:"row", }}>
-           <Link className=" navlink" to="/Dashboard">Home </Link>
-           <Link className=" navlink" to="/Profile">Profile </Link>
+           <Link className=" navlink" to="/">Home </Link>
+           {/* <Link className=" navlink" to="/Profile">Profile </Link> */}
            
            
-           <Link className=" navlink" to="/Profile">Analytics </Link>
+           {/* <Link className=" navlink" to="/Profile">Analytics </Link> */}
            
            <Link className=" navlink" to="/Resources">Resources </Link>
            
-           <Link className=" navlink" to="/Profile">Dashboard </Link>
+           {/* <Link className=" navlink" to="/Dashboard">Dashboard </Link> */}
            </div>
 
             
@@ -55,15 +55,15 @@ const Navigation =(props)=> {
         <nav className="">
         <div className="navbar" style={{display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"row", width :"100%", backgroundColor: "#1E7C83"}}>
          <div  style={{display:"flex", flexDirection:"row", }}>
-        <Link className=" navlink loggedin" to="/Dashboard">Home </Link>
+        <Link className=" navlink loggedin" to="/">Home </Link>
         <Link className=" navlink loggedin" to="/Profile">Profile </Link>
         
         
-        <Link className=" navlink loggedin" to="/Profile">Analytics </Link>
+        {/* <Link className=" navlink loggedin" to="/Profile">Analytics </Link> */}
         
         <Link className=" navlink loggedin" to="/Resources">Resources </Link>
         
-        <Link className=" navlink loggedin" to="/Profile">Dashboard </Link>
+        <Link className=" navlink loggedin" to="/Dashboard">Dashboard </Link>
         </div>
 
          

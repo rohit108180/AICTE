@@ -5,6 +5,7 @@ var {getUser} = require("../Middleware/User")
 
 router.route("/register").post(auth.Register);
 router.route("/login").post(auth.Login);
-router.route("/logout").post(getUser,auth.Logout);
+// router.route("/logout").post(getUser,auth.Logout);
+router.route("/updateUser").patch(auth.UpdateUser);
 
 module.exports = router;
