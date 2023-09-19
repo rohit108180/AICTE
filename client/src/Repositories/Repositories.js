@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Popup from "./Popup";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -289,20 +289,15 @@ export default function Repositories() {
                   <CardActions>
                     <Button
                       variant="contained"
+                      fullWidth
                       onClick={() => {
                         Versions(Repo);
                       }}
                     >
-                      Edit
+                      View
+                      
                     </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        handleUpdate(Repo._id);
-                      }}
-                    >
-                      Update
-                    </Button>
+                  
                   </CardActions>
                 </Card>
               );
@@ -314,14 +309,15 @@ export default function Repositories() {
       {isOpen && (
         <Popup
           content={
-            <>
+            <div style={{padding:"2rem"}}>
+
               <h4 style={{ textAlign: "center", marginBottom: 30 }}>
                 Repository Detail
               </h4>
               <form onSubmit={AddRepo}>
                 <div class="row">
                   <div class="mb-3 col col-10">
-                    <label for="course-code" class="form-label">
+                    {/* <label for="course-code" class="form-label">
                       Repository name
                     </label>
                     <input
@@ -330,30 +326,52 @@ export default function Repositories() {
                       id="course-code"
                       value={Title}
                       onChange={(e) => setTitle(e.target.value)}
-                    />
+                    /> */}
+
+
+                  <TextField  
+                        fullWidth
+                        id="name"
+                        label="Curriculum Title"
+                        name='name'
+                        value={Title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        margin='normal'
+                        // width="100%"
+                        style ={{marginRight : "1rem"}}
+                      
+                    /> 
                   </div>
                 </div>
                 <div class="mb-3 col col-10">
-                  <label for="course-name" class="form-label">
-                    Description
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="course-name"
-                    value={Desc}
-                    onChange={(e) => setDesc(e.target.value)}
-                  />
+                 
+                    <TextField
+                        fullWidth
+                        id="name"
+                        label="Description"
+                        name='name'
+                        value={Desc}
+                        onChange={(e) => setDesc(e.target.value)}
+                        margin='normal'
+                        // width="100%"
+                        style ={{marginRight : "1rem"}}
+                        multiline
+                    /> 
+                  
                 </div>
 
-                <input
+                {/* <input
                   type="submit"
                   name="submit"
                   value="Submit"
                   className=" btn btn-primary ms-auto me-0 me-md-3 my-2 my-md-0"
-                />
+                /> */}
+                <Button variant="contained" onClick={AddRepo}>
+                  Submit
+                </Button>
+
               </form>
-            </>
+            </div>
           }
           handleClose={handleCloseX}
         />
