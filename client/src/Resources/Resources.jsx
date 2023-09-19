@@ -155,20 +155,31 @@ export default function Resources() {
   // Component
   return (
     <Box ml={20} mr={20} mt={10} mb={10}>
-      <Box>
-        <Typography variant="h3" component="h1" fontWeight="bold">
-          Repository
-        </Typography>
-        <Typography fontSize={28} mt={2} color="#1E7C83" maxWidth="550px">
-          Find here all the latest books, research papers and curricular updates
-        </Typography>
-        <Button
-          onClick={handleOpen}
-          variant="contained"
-          sx={{ mt: 3, fontWeight: "bold" }}
-        >
-          Add New
-        </Button>
+      <Box
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box>
+          <Typography variant="h3" component="h1" fontWeight="bold">
+            Repository
+          </Typography>
+          <Typography fontSize={28} mt={2} color="#1E7C83" maxWidth="550px">
+            Find here all the latest books, research papers and curricular
+            updates
+          </Typography>
+        </Box>
+        <Box>
+          <Button
+            onClick={handleOpen}
+            variant="outlined"
+            sx={{ mt: 3, fontWeight: "bold", fontSize: 20}}
+          >
+            + Add New
+          </Button>
+        </Box>
       </Box>
       <Box
         sx={{
