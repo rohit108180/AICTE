@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import ModalForm from "./ModalForm";
+import options from "./FilterOptions";
 const API_URL = "http://localhost:5000";
 
 function Dropdown({ name, value, dropdownHandle, options }) {
@@ -31,7 +32,7 @@ function Dropdown({ name, value, dropdownHandle, options }) {
           id={name + "-st1"}
           style={{
             color: "#1E7C83",
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: "bold",
           }}
         >
@@ -44,16 +45,21 @@ function Dropdown({ name, value, dropdownHandle, options }) {
           labelId={name + "-st1"}
           onChange={dropdownHandle}
           sx={{
-            fontSize: 26,
+            fontSize: 20,
             textAlign: "center",
             borderRadius: 2,
+          }}
+          MenuProps={{
+            PaperProps: {
+              sx: { maxHeight: "400px" },
+            },
           }}
         >
           {options.map((option, i) => {
             return (
               <MenuItem key={option + i} value={option}>
                 <Typography
-                  style={{ fontSize: 24, fontWeight: "bold", color: "#1E7C83" }}
+                  style={{ fontSize: 20, fontWeight: "bold", color: "#1E7C83" }}
                 >
                   {option}
                 </Typography>
@@ -104,19 +110,11 @@ export default function Resources() {
   // States
   const [filter, setFilter] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
-  const [degOptions, setDegOptions] = useState(["B.Tech", "M.Tech", "BBA"]);
-  const [brOptions, setBrOptions] = useState([
-    "Computer Science and Engineering",
-    "Mechanical Engineering",
-    "Course",
-  ]);
-  const [crOptions, setCrOptions] = useState([
-    "Introduction to Programming",
-    "Operating Systems",
-  ]);
+  const [degOptions, setDegOptions] = useState(options.degreeOptions);
+  const [deptOptions, setDeptOptions] = useState(options.departmentOptions);
+  const [crOptions, setCrOptions] = useState(options.courseOptions);
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
-
   // Utility
   const makeDropdownHandle = (name) => {
     return (event) => {
@@ -164,7 +162,13 @@ export default function Resources() {
         <Typography fontSize={28} mt={2} color="#1E7C83" maxWidth="550px">
           Find here all the latest books, research papers and curricular updates
         </Typography>
-        <Button onClick={handleOpen} variant="contained" sx={{mt: 3, fontWeight: "bold"}} >Add New</Button>
+        <Button
+          onClick={handleOpen}
+          variant="contained"
+          sx={{ mt: 3, fontWeight: "bold" }}
+        >
+          Add New
+        </Button>
       </Box>
       <Box
         sx={{
@@ -187,7 +191,7 @@ export default function Resources() {
         <Dropdown
           name={"Department"}
           value={filter["department"] ? filter["department"] : ""}
-          options={brOptions}
+          options={deptOptions}
           dropdownHandle={makeDropdownHandle("department")}
         />
         <Dropdown
@@ -210,14 +214,16 @@ export default function Resources() {
         }}
       >
         {loading ? (
-          <CircularProgress sx={{mt: 10}} size={80}/>
+          <CircularProgress sx={{ mt: 10 }} size={80} />
         ) : resources.length > 0 ? (
           resources.map((resource, index) => (
             <ResourceCard resource={resource} key={resource.name + index} />
           ))
         ) : (
           <Box>
-            <Typography style={{color: "gray", fontSize: 24}} mt={10}>No Match Found</Typography>
+            <Typography style={{ color: "gray", fontSize: 24 }} mt={10}>
+              No Match Found
+            </Typography>
           </Box>
         )}
       </Box>
