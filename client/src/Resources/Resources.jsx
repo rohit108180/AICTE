@@ -10,8 +10,10 @@ import {
   CardContent,
   InputLabel,
   CircularProgress,
+  Button,
 } from "@mui/material";
 import axios from "axios";
+import ModalForm from "./ModalForm";
 const API_URL = "http://localhost:5000";
 
 function Dropdown({ name, value, dropdownHandle, options }) {
@@ -104,7 +106,7 @@ export default function Resources() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [degOptions, setDegOptions] = useState(["B.Tech", "M.Tech", "BBA"]);
   const [brOptions, setBrOptions] = useState([
-    "Computer Science And Engineering",
+    "Computer Science and Engineering",
     "Mechanical Engineering",
     "Course",
   ]);
@@ -147,6 +149,11 @@ export default function Resources() {
     })();
   }, [filter]);
 
+  // Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = (e) => setOpen(true);
+  const handleClose = (e) => setOpen(false);
+
   // Component
   return (
     <Box ml={20} mr={20} mt={10} mb={10}>
@@ -157,6 +164,7 @@ export default function Resources() {
         <Typography fontSize={28} mt={2} color="#1E7C83" maxWidth="550px">
           Find here all the latest books, research papers and curricular updates
         </Typography>
+        <Button onClick={handleOpen} variant="contained" sx={{mt: 3, fontWeight: "bold"}} >Add New</Button>
       </Box>
       <Box
         sx={{
@@ -213,6 +221,7 @@ export default function Resources() {
           </Box>
         )}
       </Box>
+      <ModalForm open={open} handleClose={handleClose} />
     </Box>
   );
 }

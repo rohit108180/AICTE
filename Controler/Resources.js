@@ -11,7 +11,6 @@ module.exports.get = async (req, res) => {
     if (degree) filterObj.Degree = degree;
     if (department) filterObj.Department = department;
     if (course) filterObj.Course = course;
-    console.log(filterObj);
     const resources = await Resource.find(filterObj);
     await res.status(200).json(resources);
   } catch (err) {
