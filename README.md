@@ -16,6 +16,8 @@ A unified portal for developing a model Curriculum for all the AICTE Approved In
 <br/>
 
 ## How to run the demo
+You can view the live link https://aicte-portal-frontend.onrender.com/ <br/>
+Or to run the project locally please follow the below steps
 1. Clone this repository on your local system
 2. Run command "npm i && cd client && npm i" to install the necessary libraries
 3. After installing libraries run the prototype using command-"node app.js && cd client && npm start"
