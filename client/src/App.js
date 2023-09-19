@@ -23,6 +23,7 @@ import { AppProvider } from "./Context/context/appContext";
 import SingIn from "./Login Signup/SingIn";
 import SignUp from "./Login Signup/SignUp";
 
+import {MessageBar} from "./Components/MessageBar"
 function App() {
   // src/theme.js
 
@@ -45,6 +46,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <AuthProvider>
           <AppProvider>
+          <MessageBar/>
             <Routes>
               <Route element={<Navigation />}>
                 <Route path="/" element={<Landing />} />

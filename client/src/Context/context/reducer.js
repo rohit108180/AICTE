@@ -1,4 +1,4 @@
-import { ADD_COMMENT, CLEAR_ALERT, GET_ALL_POSTS, GET_MY_POSTS, GET_NOTIFICATIONS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_LIKE, TOGGLE_SIDEBAR, UPDATE_PROFILE } from "./types"
+import { ADD_COMMENT, CLEAR_ALERT, GET_ALL_POSTS, GET_BOOKMARKS, GET_MY_POSTS, GET_NOTIFICATIONS, LOGOUT, SETUP_USER_BEGINS, SETUP_USER_ERROR, SETUP_USER_SUCCESS, SHOW_ALERT, START_LOADING, STOP_LOADING, TOGGLE_LIKE, TOGGLE_SIDEBAR, UPDATE_PROFILE } from "./types"
 import { initialState } from "./appContext"
 
 export const reducer = (state, action) =>{
@@ -120,6 +120,12 @@ export const reducer = (state, action) =>{
             return{
                 ...state,
                 user :action.payload.user
+            }
+
+        case GET_BOOKMARKS:
+            return{
+                ...state,
+                bookmarks : action.payload.bookmarks
             }
         
         default :

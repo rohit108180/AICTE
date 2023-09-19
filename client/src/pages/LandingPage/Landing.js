@@ -22,10 +22,10 @@ import CardMedia from "@mui/material/CardMedia";
 
 export const Landing = () => {
   const { setLogin } = useAuth();
-  const { user } = useAppcontext();
+  const { user, addBookmark } = useAppcontext();
 
   useEffect(() => {
-    getData();
+    if(user)getData();
   }, []);
 
   const navigate = useNavigate();
@@ -95,6 +95,10 @@ export const Landing = () => {
 
   const [Repos, setRepos] = useState([]);
 
+
+
+
+
   const getData = async () => {
     const response = await axios.get("http://localhost:5000/Repos/view/all");
     setRepos(response.data);
@@ -111,7 +115,7 @@ export const Landing = () => {
     }
   }, [user, navigate]);
   return (
-    <div style={{ marginTop: "60px" }}>
+    <div style={{ marginTop: "53px" }}>
       <div className="topPart">
         <img className="coverImage" src={coverImage} />
         <h1 className="tagLine">
@@ -121,12 +125,12 @@ export const Landing = () => {
         <img className="secondary-image" src={secondaryImage} />
       </div>
 
+{user &&
       <div className="section">
         <div className="section-heading">
           <h2>On going Projects</h2>
           <div className="borderline"> </div>
         </div>
-
         <div className="section-content">
           {Repos.map((Repo) => {
             return (
@@ -172,9 +176,9 @@ export const Landing = () => {
                   </Button>
                   <Button
                     variant="outlined"
-                    // onClick={() => {
-                    //   handleUpdate(Repo._id);
-                    // }}
+                    onClick={() => {
+                      addBookmark(Repo._id);
+                    }}
                   >
                     Bookmark
                   </Button>
@@ -184,6 +188,7 @@ export const Landing = () => {
           })}
         </div>
       </div>
+        }
       <div className="section">
         <div className="section-heading">
           <h2>Initiative and Schemes</h2>

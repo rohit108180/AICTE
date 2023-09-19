@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
 import img from "../assests/landingimage2.png";
+import { useAppcontext } from "../Context/context/appContext";
 export default function Repositories() {
   const [Repos, setRepos] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,7 @@ export default function Repositories() {
   const [Desc, setDesc] = useState("");
   const [id, setid] = useState("");
   const [update, setUpdate] = useState(false);
+
   const navigate = useNavigate();
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -30,8 +32,10 @@ export default function Repositories() {
 
   useEffect(() => {
     getData();
+    getBookmarks();
   }, []);
 
+  const {getBookmarks , bookmarks} = useAppcontext();
   const handleUpdate = async (id) => {
     setUpdate(true);
     const response = await axios.get(`http://localhost:5000/Repos/${id}`);
@@ -195,24 +199,91 @@ export default function Repositories() {
           <div className="section-headingRepo">
             <Typography variant="h4"> Unfinished Curriculum</Typography>
           </div>
-          <div className="repo-cards">
-            {Repos.map((Repo) => {
+          <div className="repo-cards" style={
+            {
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+              // alignItems: "center",
+              width : "100%"
+            }
+          }>
+            {Repos?.map((Repo) => {
               return (
                 <Card
                   sx={{
-                    maxWidth: 400,
-                    margin: "2rem",
+                    width: 400,
+                    height: 450,
+                    margin: "1rem",
                     padding: "2rem",
                     border: "1px solid #1E7C83",
                   }}
                   key={Repo._id}
                 >
                   <CardContent>
-                    <Typography gutterBottom variant="h4" component="div">
+                    <Typography gutterBottom variant="h4" component="div"style={{height:150, marginBottom:"1rem"}}>
                       {Repo.Title}
                     </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      {Repo.Desc}
+                    <Typography variant="body1" color="text.secondary" style={{height:150}}>
+                      {Repo.Desc.length > 200? Repo.Desc.substring(0, 200) + "..." : Repo.Desc}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        Versions(Repo);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        handleUpdate(Repo._id);
+                      }}
+                    >
+                      Update
+                    </Button>
+                  </CardActions>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+
+
+        <div className="sectionRepo" id ="Bookmarks">
+          <div className="section-headingRepo">
+            <Typography variant="h4"> Bookmarks</Typography>
+          </div>
+          <div className="repo-cards" style={
+            {
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+              // alignItems: "center",
+              width : "100%"
+            }
+          }>
+            {bookmarks?.map((Repo) => {
+              return (
+                <Card
+                  sx={{
+                    width: 400,
+                    height: 450,
+                    margin: "1rem",
+                    padding: "2rem",
+                    border: "1px solid #1E7C83",
+                  }}
+                  key={Repo._id}
+                >
+                  <CardContent>
+                    <Typography gutterBottom variant="h4" component="div"style={{height:150, marginBottom:"1rem"}}>
+                      {Repo.Title}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary" style={{height:150}}>
+                      {Repo.Desc.length > 200? Repo.Desc.substring(0, 200) + "..." : Repo.Desc}
                     </Typography>
                   </CardContent>
                   <CardActions>

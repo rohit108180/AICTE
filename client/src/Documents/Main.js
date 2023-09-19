@@ -60,6 +60,7 @@ export default function Main() {
   const Delete = async (id) => {
     await axios.delete(`http://localhost:5000/Repos/${id}`);
     getData();
+    navigate("/Dashboard");
   };
 
   function stringToColor(string) {
@@ -98,16 +99,8 @@ export default function Main() {
     >
       <div className="col d-flex" style={{justifyContent: "space-between"}}>
         <div>
-          <div className="col d-flex justify-content-end">
-            <h3>Collaborators</h3>
-          </div>
-          <Stack direction="row" spacing={2} className="col d-flex justify-content-end"
-            style={{marginBottom: "2rem"}}
-          >
-            <Avatar {...stringAvatar('Kent Dodds')} />
-            <Avatar {...stringAvatar('Jed Watson')} />
-            <Avatar {...stringAvatar('Tim Neutkens')} />
-          </Stack>
+          <Button variant="contained" color="secondary"  onClick={()=>{navigate(-1)}} >back</Button>
+          
         </div>
         <div>
           <Button variant="contained" onClick={togglePopup}>
@@ -127,6 +120,19 @@ export default function Main() {
           </>
           }
         </div>
+      </div>
+
+      <div style={{margin:"2rem"}}>
+          <div className="col d-flex justify-content-end" >
+            <h3>Collaborators</h3>
+          </div>
+          <Stack direction="row" spacing={2} className="col d-flex justify-content-end"
+            style={{marginBottom: "2rem"}}
+          >
+            <Avatar  />
+            <Avatar />
+            <Avatar  />
+          </Stack>
       </div>
 
       <div>
