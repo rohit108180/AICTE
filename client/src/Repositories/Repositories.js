@@ -35,7 +35,7 @@ export default function Repositories() {
     getBookmarks();
   }, []);
 
-  const {getBookmarks , bookmarks} = useAppcontext();
+  const {user,getBookmarks , bookmarks} = useAppcontext();
   const handleUpdate = async (id) => {
     setUpdate(true);
     const response = await axios.get(`http://localhost:5000/Repos/${id}`);
@@ -182,7 +182,9 @@ export default function Repositories() {
       <div>
         <div className="topPartRepo">
           <div className="userInfo">
-            <h1>Hey Rohit,</h1>
+            {/* take only first name from the name */}
+        
+            <h1>Hey {user.name.split(" ")[0]},</h1>
             <Typography variant="h4" color="primary">
               Here's your progress
             </Typography>

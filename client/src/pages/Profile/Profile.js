@@ -9,11 +9,16 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { Button, Chip, TextField } from '@mui/material'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useAppcontext } from '../../Context/context/appContext';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const Profile = () => {
 
     const {user, updateProfile}  =useAppcontext();
     const [avatarPreview, setAvatarPreview2] = useState(undefined);
+
+    // get first part from the name
+    // const name = user.name.split(" ")[0];
+
     // const [profile, setProfile] = useState({
     //     name: 'Rohit Sharma',
     //     email: 'rohit@gmail.com',
@@ -27,7 +32,7 @@ export const Profile = () => {
     //     specializations: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MongoDB"],
     //     institute: 'Netaji Subhas University of Technology',
     // })
-
+    const navigate = useNavigate()
     const [profile, setProfile] = useState({...user});
 
     // setProfile(user);
@@ -88,7 +93,7 @@ export const Profile = () => {
             </div>
             
             <div className='name'>
-                <h2>Rohit Sharma</h2>
+                <h2>{profile?.name}</h2>
 
             </div>
             <div className='socials'> 
@@ -104,13 +109,13 @@ export const Profile = () => {
 
             </div>
             {/* put button at the bottom of flex  */}
-            <Button  className = "bookmark" variant="contained" startIcon={<BookmarkIcon />}  >Saved Curriculum</Button>
+            <Button  className = "bookmark" onClick={()=>navigate("/Dashboard#Bookmarks", {replace:true})} variant="contained" startIcon={<BookmarkIcon />}  >Saved Curriculum</Button>
 
 
 
         </div>
         <div className='right'>
-            <div style={{display:'flex', flexDirection:"column", width:"60%", paddingTop: "5rem"}}>
+            <div style={{display:'flex', flexDirection:"column", width:"60%", paddingTop: "5rem", paddingBottom:"5rem"}}>
 
                 <div style={{width:"100%", display:"flex", flexDirection:"row"}}>
             <TextField
@@ -176,7 +181,7 @@ export const Profile = () => {
                 id="specialization"
                 label="Specialization"
                 name='specialization'
-                value={""}
+                value = {profile?.specialization}
                 onChange={onChange}
                 margin='normal'
             /> 
