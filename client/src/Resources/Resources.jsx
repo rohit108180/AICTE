@@ -9,6 +9,7 @@ import {
   Card,
   CardContent,
   InputLabel,
+  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
 const API_URL = "http://localhost:5000";
@@ -98,7 +99,7 @@ function ResourceCard({ resource }) {
 }
 
 export default function Resources() {
-  // Filter and Options
+  // States
   const [filter, setFilter] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [degOptions, setDegOptions] = useState(["B.Tech", "M.Tech", "BBA"]);
@@ -111,6 +112,8 @@ export default function Resources() {
     "Introduction to Programming",
     "Operating Systems",
   ]);
+  const [resources, setResources] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Utility
   const makeDropdownHandle = (name) => {
@@ -133,16 +136,16 @@ export default function Resources() {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const newResources = await axios.get(API_URL + "/resources", {
         params: {
           ...filter,
         },
       });
       setResources(newResources.data);
+      setLoading(false);
     })();
   }, [filter]);
-  // Resources
-  const [resources, setResources] = useState([]);
 
   // Component
   return (
@@ -198,12 +201,16 @@ export default function Resources() {
           alignContent: "flex-start",
         }}
       >
-        {resources ? (
+        {loading ? (
+          <CircularProgress sx={{mt: 10}} size={80}/>
+        ) : resources.length > 0 ? (
           resources.map((resource, index) => (
             <ResourceCard resource={resource} key={resource.name + index} />
           ))
         ) : (
-          <></>
+          <Box>
+            <Typography style={{color: "gray", fontSize: 24}} mt={10}>No Match Found</Typography>
+          </Box>
         )}
       </Box>
     </Box>
