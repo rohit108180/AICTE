@@ -22,6 +22,7 @@ import { Analytics } from "./Analytics/Analytics.js";
 import { AppProvider } from "./Context/context/appContext";
 import SingIn from "./Login Signup/SingIn";
 import SignUp from "./Login Signup/SignUp";
+import Admin from "./Admin/Admin";
 
 function App() {
   // src/theme.js
@@ -56,6 +57,7 @@ function App() {
                   <Route path="/Profile" element={<Profile />} />
                   <Route path="/Resources" element={<Resources />} />
                   <Route path="/Analytics" element={<Analytics />} />
+                  <Route path="/Admin" element={<Admin />}/>
                   <Route path="/:Title" element={<Main />} />
                   <Route path="/Edit/:Title" element={<TextEditor />} />
                 </Route>

@@ -9,8 +9,7 @@ import { useAppcontext } from "./Context/context/appContext";
 const Navigation = (props) => {
   const navigate = useNavigate();
   const { setLogin, Login } = useAuth();
-
-  const { logoutUser } = useAppcontext();
+  const { user, logoutUser } = useAppcontext();
 
   const handleClick = async () => {
     if (Login) {
@@ -90,6 +89,9 @@ const Navigation = (props) => {
               <Link className=" navlink loggedin" to="/Dashboard">
                 Dashboard{" "}
               </Link>
+              {user.role === "0" && <Link className=" navlink loggedin" to="/Admin">
+                Admin Panel{" "}
+              </Link>}
             </div>
 
             <span style={{ position: "absolute", right: "5rem" }}>

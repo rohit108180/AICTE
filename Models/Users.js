@@ -61,7 +61,6 @@ var UserSchema = new mongoose.Schema({
         ref: "Skills",
       },
     ],
-
     workExperience: [
       {
         type: Schema.Types.ObjectId,
@@ -86,6 +85,10 @@ var UserSchema = new mongoose.Schema({
       type: Date,
       default: Date.now,
     },
+    approved: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );
