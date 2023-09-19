@@ -6,26 +6,29 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import img from '../assests/landingimage2.png'
+import { useNavigate } from "react-router-dom";
 
-export default function CardComponent() {
+export default function CardComponent({details}) {
+
+
+  const navigate = useNavigate();
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
-        image= {img}
+        image= {details?.imageLink}
         title="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Scheme1
+          {details?.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {details?.description.length > 200? details?.description.substring(0, 200) + "..." : details?.description}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" ><a href ={details?.learnMoreLink} target="_blank" style={{textDecoration :"none"}}>Learn More </a></Button>
       </CardActions>
     </Card>
   );

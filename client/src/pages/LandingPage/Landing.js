@@ -36,7 +36,7 @@ export const Landing = () => {
       description:
         " NDF is a scheme to provide financial assistance to meritorious students pursuing Ph.D. in technical disciplines. It aims to promote research and development activities in India.",
       imageLink:
-        "https://www.google.co.in/url?sa=i&url=https%3A%2F%2Fjobrule.com%2F2018%2F05%2Faicte-approved-ndf-admission-to-ph-d-programmes-for-academic-year-2018-2019.html&psig=AOvVaw35WrFqfQTeLtjKpicGobAG&ust=1695191443027000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCPCb0rCGtoEDFQAAAAAdAAAAABAJ",
+        "https://scholarshiparena.in/wp-content/uploads/2021/08/AICTE-National-Doctoral-Fellowship.webp",
       learnMoreLink:
         "https://www.aicte-india.org/content/national-doctoral-fellowship-ndf",
     },
@@ -45,7 +45,7 @@ export const Landing = () => {
       description:
         "NDL is a digital platform that provides access to a vast collection of academic resources, including textbooks, articles, and videos, to support learning and research.",
       imageLink:
-        "https://www.google.co.in/url?sa=i&url=https%3A%2F%2Fndl.iitkgp.ac.in%2F&psig=AOvVaw1iuSpz8ZUb0uv9CcU2OGWg&ust=1695191558579000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMCG4OeGtoEDFQAAAAAdAAAAABAE",
+        "https://upload.wikimedia.org/wikipedia/commons/4/4a/National_Digital_Library_of_India.png",
       learnMoreLink:
         "https://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi-xtnvhraBAxUhbWwGHXsjBjIQFnoECA0QAQ&url=https%3A%2F%2Fndl.iitkgp.ac.in%2F&usg=AOvVaw18TBWrlUzTnpNhwgCtP6s6&opi=89978449",
     },
@@ -54,7 +54,7 @@ export const Landing = () => {
       description:
         "ATAL Academy offers online and offline courses, workshops, and training programs to enhance the technical and entrepreneurial skills of students and faculty members.",
       imageLink:
-        "https://www.google.co.in/imgres?imgurl=https%3A%2F%2Fmedia.umangapp.in%2Fapp%2Fico%2Fservice%2Fatalacademy.png&tbnid=KOyFaOYDZVIv1M&vet=12ahUKEwjU3beWh7aBAxXHTGwGHUIeB1UQMygAegQIARBR..i&imgrefurl=https%3A%2F%2Fweb.umang.gov.in%2Flanding%2Fdepartment%2Faicte-training-and-learning-atal-academy.html&docid=V6yLPtqZuw-8BM&w=245&h=206&q=AICTE%20Training%20and%20Learning%20(ATAL)%20Academy&hl=en&ved=2ahUKEwjU3beWh7aBAxXHTGwGHUIeB1UQMygAegQIARBR",
+        "https://iitpkd.ac.in/sites/default/files/2021-12/atal_1.png",
       learnMoreLink:
         "https://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiF6quNh7aBAxU-T2wGHRTFCY0QFnoECA8QAQ&url=https%3A%2F%2Fwww.aicte-india.org%2Fatal&usg=AOvVaw2kFv3GTQ_f-ax8jy7-jG35&opi=89978449",
     },
@@ -191,22 +191,24 @@ export const Landing = () => {
         </div>
 
         <div className="section-content">
-          <CardComponent />
-          <CardComponent />
-          <CardComponent />
+          {initiatives.map((initiative) => {
+            return <CardComponent details={initiative} />;
+          })}
         </div>
       </div>
 
       <div className="section">
         <div className="section-heading">
-          <h2>Initiative and Schemes</h2>
+          <h2>Latest News</h2>
           <div className="borderline"> </div>
         </div>
 
         <div className="section-content">
-          <CardComponent />
-          <CardComponent />
-          <CardComponent />
+          {
+            news.map((news)=>{
+              return <CardComponent details={news} />
+            })
+          }
         </div>
       </div>
     </div>
