@@ -94,7 +94,7 @@ export default function Main() {
   return (
     <div
       className="container"
-      style={{ height: 700, width: "100%", padding: 20, filter: "blur(5)"}}
+      style={{  width: "100%", padding: "5rem", filter: "blur(5)"}}
     >
       <div className="col d-flex" style={{justifyContent: "space-between"}}>
         <div>
@@ -168,7 +168,7 @@ export default function Main() {
           handleClose={handleCloseX}
         />
       )}
-      <div style={{backgroundColor :"white", padding:"5rem"}}>
+      <div style={{backgroundColor :"white", padding:"5rem", border: "2px Solid #1E7C83", borderRadius: "10px"}}>
         <div className="col d-flex justify-content-center">
           <h1 style= {{marginBottom:"5rem"}}>{Title}</h1>
         </div>
