@@ -16,12 +16,12 @@ function ApprovalRow({ user }) {
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "white",
-        padding: 3,
+        padding: 2,
         boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.25)",
         borderRadius: 2,
       }}
     >
-      <Typography fontSize={23}>{user.name} </Typography>
+      <Typography fontSize={22}>{user.name} </Typography>
       <Box>
         <Button variant="contained" style={buttonStyle} onClick={handleApprove}>
           Approve

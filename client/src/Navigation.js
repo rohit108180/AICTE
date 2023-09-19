@@ -89,7 +89,7 @@ const Navigation = (props) => {
               <Link className=" navlink loggedin" to="/Dashboard">
                 Dashboard{" "}
               </Link>
-              {user.role === "0" && <Link className=" navlink loggedin" to="/Admin">
+              {user.role === "Administrator" && <Link className=" navlink loggedin" to="/Admin">
                 Admin Panel{" "}
               </Link>}
             </div>
