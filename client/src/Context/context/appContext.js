@@ -112,6 +112,8 @@ export const initialState = {
    
         try {
         startLoading();
+
+      
         const res  = await axios.get(`${BASE_URL}/api/v1/post`);
         let data  = res.data.posts
 

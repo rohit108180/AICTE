@@ -6,8 +6,11 @@ import { Button, Typography } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
+import {useAppcontext} from "../Context/context/appContext";
+
 export default function Main() {
   const { state } = useLocation();
+  const {user} = useAppcontext(); 
   const { _id, Title, Desc, User } = state.Repo;
   const [Version, setVersion] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +56,12 @@ export default function Main() {
     setContent(response.data.Content);
   };
 
+
+  const Delete = async (id) => {
+    await axios.delete(`http://localhost:5000/Repos/${id}`);
+    getData();
+  };
+
   function stringToColor(string) {
     let hash = 0;
     let i;
@@ -85,7 +94,7 @@ export default function Main() {
   return (
     <div
       className="container"
-      style={{ height: 700, width: "100%", padding: 20, filter: "blur(5)"}}
+      style={{  width: "100%", padding: "5rem", filter: "blur(5)"}}
     >
       <div className="col d-flex" style={{justifyContent: "space-between"}}>
         <div>
@@ -105,9 +114,18 @@ export default function Main() {
             Versions
           </Button>
           &nbsp;&nbsp;
+
+          {
+            user._id === User &&
+            <>
           <Button variant="outlined" onClick={Edit}>
             Edit
           </Button>
+          <Button variant="outlined" color="error" onClick={() => Delete(_id)}>
+            Delete
+          </Button>
+          </>
+          }
         </div>
       </div>
 
@@ -150,9 +168,9 @@ export default function Main() {
           handleClose={handleCloseX}
         />
       )}
-      <div>
+      <div style={{backgroundColor :"white", padding:"5rem", border: "2px Solid #1E7C83", borderRadius: "10px"}}>
         <div className="col d-flex justify-content-center">
-          <h1>{Title}</h1>
+          <h1 style= {{marginBottom:"5rem"}}>{Title}</h1>
         </div>
         <div dangerouslySetInnerHTML={{ __html: Content }}></div>
       </div>
