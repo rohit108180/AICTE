@@ -21,7 +21,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-const API_URL = "http://localhost:5000";
+const API_URL = "https://aicte-portal-backend.onrender.com";
 
 export default function ModalForm({ open, handleClose }) {
   const [name, setName] = useState("");

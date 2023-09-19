@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import ModalForm from "./ModalForm";
 import options from "./FilterOptions";
-const API_URL = "http://localhost:5000";
+const API_URL = "https://aicte-portal-backend.onrender.com";
 
 function Dropdown({ name, value, dropdownHandle, options }) {
   return (

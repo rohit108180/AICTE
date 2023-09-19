@@ -20,7 +20,7 @@ export default function Register() {
 
             const newUser = {name, role ,Email,Password}
             console.log(newUser);
-        const response = await axios.post("http://localhost:5000/user/register",newUser)
+        const response = await axios.post("https://aicte-portal-backend.onrender.com/user/register",newUser)
         const data = await response.data
         if(data=="already exists"){
             alert("User with this email already exists")

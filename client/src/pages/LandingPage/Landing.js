@@ -100,7 +100,7 @@ export const Landing = () => {
 
 
   const getData = async () => {
-    const response = await axios.get("http://localhost:5000/Repos/view/all");
+    const response = await axios.get("https://aicte-portal-backend.onrender.com/Repos/view/all");
     setRepos(response.data);
   };
 

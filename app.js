@@ -17,6 +17,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use("/", (req, res) => {
+  res.send("Hello World");
+});
+
 app.use("/user", user);
 app.use("/repos",getUser,repos);
 app.use("/version",getUser,versions);
