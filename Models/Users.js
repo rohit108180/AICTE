@@ -35,6 +35,16 @@ var UserSchema = new mongoose.Schema({
       trim: true,
       default: "",
     },
+    institute :{
+      type :String,
+      trim : true,
+      default : ""
+    },
+    specialization :{
+      type :String,
+      trim : true,
+      default : ""
+    },
 
     profilePicture: {
       url : String,

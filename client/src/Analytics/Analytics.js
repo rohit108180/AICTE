@@ -3,14 +3,18 @@ import { Typography } from "@mui/material";
 import { BarChart, LineChart, PieChart } from "@mui/x-charts";
 
 import analytics from '../assests/analytics.svg'
+import { useContext } from "react";
+import { useAppcontext } from "../Context/context/appContext";
 
 export const Analytics = () => {
+
+  const {user} = useAppcontext();
   return (
     <div style={{ marginTop: "60px" }}>
       
       <div className="topPartRepo">
           <div className="userInfo">
-            <h1>Hey Rohit,</h1>
+            <h1>Hey {user.name.split(" ")[0]},</h1>
             <Typography variant="h4" color="primary">
               Here's Some insights for you
             </Typography>
@@ -23,7 +27,7 @@ export const Analytics = () => {
           </Button> */}
 
           <div width="200px" height="200px">
-            <img src={analytics} style={{width:"500px" }}/>
+            <img src={analytics} style={{width:"300px" }}/>
           </div>
         </div>
 
