@@ -32,7 +32,7 @@ export default function Main() {
   const getData = async () => {
     console.log(_id);
     const response = await axios.get(
-      `http://localhost:5000/version/all/${state.Repo._id}`
+      `https://aicte-portal-backend.onrender.com/version/all/${state.Repo._id}`
     );
     setVersion(response.data);
     if (response.data.length > 0) {
@@ -42,7 +42,7 @@ export default function Main() {
   const getContent = async (array) => {
     const obj = array[array.length - 1];
     const response = await axios.get(
-      `http://localhost:5000/version/${obj._id}`
+      `https://aicte-portal-backend.onrender.com/version/${obj._id}`
     );
     console.log(response.data);
     setContent(response.data.Content);
@@ -52,13 +52,13 @@ export default function Main() {
     navigate(`/Edit/${state.Repo.Title}`, { state: { Repo: state.Repo } });
   };
   const getCon = async (id) => {
-    const response = await axios.get(`http://localhost:5000/version/${id}`);
+    const response = await axios.get(`https://aicte-portal-backend.onrender.com/version/${id}`);
     setContent(response.data.Content);
   };
 
 
   const Delete = async (id) => {
-    await axios.delete(`http://localhost:5000/Repos/${id}`);
+    await axios.delete(`https://aicte-portal-backend.onrender.com/Repos/${id}`);
     getData();
     navigate("/Dashboard");
   };

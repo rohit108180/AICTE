@@ -38,7 +38,7 @@ export default function Repositories() {
   const {user,getBookmarks , bookmarks} = useAppcontext();
   const handleUpdate = async (id) => {
     setUpdate(true);
-    const response = await axios.get(`http://localhost:5000/Repos/${id}`);
+    const response = await axios.get(`https://aicte-portal-backend.onrender.com/Repos/${id}`);
     const updating = await response.data;
     setid(updating._id);
     setTitle(updating.Title);
@@ -49,7 +49,7 @@ export default function Repositories() {
     e.preventDefault();
     if (Title != "" && Desc != "") {
       if (update == true) {
-        await axios.put(`http://localhost:5000/Repos/${id}`, {
+        await axios.put(`https://aicte-portal-backend.onrender.com/Repos/${id}`, {
           Title,
           Desc,
         });
@@ -59,7 +59,7 @@ export default function Repositories() {
         getData();
         togglePopup();
       } else {
-        await axios.post("http://localhost:5000/Repos/add", {
+        await axios.post("https://aicte-portal-backend.onrender.com/Repos/add", {
           Title,
           Desc,
         });
@@ -74,11 +74,11 @@ export default function Repositories() {
     }
   };
   const getData = async () => {
-    const response = await axios.get("http://localhost:5000/Repos/view");
+    const response = await axios.get("https://aicte-portal-backend.onrender.com/Repos/view");
     setRepos(response.data);
   };
   const Delete = async (id) => {
-    await axios.delete(`http://localhost:5000/Repos/${id}`);
+    await axios.delete(`https://aicte-portal-backend.onrender.com/Repos/${id}`);
     getData();
   };
 

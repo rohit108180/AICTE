@@ -34,7 +34,7 @@ export const initialState = {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const BASE_URL = "http://localhost:5000";
+    const BASE_URL = "https://aicte-portal-backend.onrender.com";
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
 
