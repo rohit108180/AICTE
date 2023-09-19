@@ -8,4 +8,5 @@ router.route("/login").post(auth.Login);
 // router.route("/logout").post(getUser,auth.Logout);
 router.route("/updateUser").patch(auth.UpdateUser);
 
+
 module.exports = router;

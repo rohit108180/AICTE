@@ -13,6 +13,10 @@ var RepoSchema = new mongoose.Schema({
     ref:"User",
     require: true,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Repositories", RepoSchema);

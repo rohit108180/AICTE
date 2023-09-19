@@ -1,5 +1,5 @@
 const Repodoc=require("../Models/Repos")
-
+var users = require("../Models/Users");
 module.exports.Add= async (req,res)=>{
     try {
         const user = req.user
@@ -39,7 +39,7 @@ module.exports.ViewAll= async (req,res)=>{
     try{    
         const user = req.user
         if(!user) return res.status("401").json("unAutherized")      
-        const Repo = await Repodoc.find() 
+        const Repo = await Repodoc.find().sort({date:-1} );
         console.log("Repo",Repo)
         await res.status("200").json(Repo)
     }
@@ -103,3 +103,52 @@ module.exports.update= async (req,res)=>{
         await res.status("400").json(err)
     }
 }
+
+
+module.exports.addBookmark = async (req,res)=>{
+    const user = req.user
+    console.log(req.params.id)
+    console.log(req.user)
+    if(!user) return res.status(401).json("unAutherized")
+
+
+    try{
+      const old = await users.findOne({_id:req.user._id})
+      if(!old) return res.status(404).json("user not found")
+        console.log("olduser",old)
+      const bookmarkId = old.bookmarks.find((id)=> id == req.params.id)
+        console.log("bookmarkId",bookmarkId)
+      if(bookmarkId) return res.status(200).json({msg :"Already bookmarked"})
+      else{
+        console.log("creating new bookmark")
+        old.bookmarks.push(req.params.id);
+        await old.save()
+        console.log("newuser",old)
+        return res.status(200).json({user : old, msg :"Curriculum bookmarked"})
+        }
+    }
+    catch(err){
+      res.status(400).json({msg : err})
+    }
+  } 
+
+
+  module.exports.getBookmarks = async (req,res)=>{
+    const user = req.user
+    if(!user) return res.status(401).json("unAutherized")
+    try{
+
+        // i want all bookmarks ids to be replaced by Repo objects
+
+
+      const old = await users.findOne({_id:req.user._id}).populate("bookmarks");
+      if(!old) return res.status(404).json("user not found")
+      const bookmarks = old.bookmarks
+      console.log("bookmarks",bookmarks)
+      return res.status(200).json({bookmarks : bookmarks})
+    }
+    catch(err){
+      res.status(400).json({msg : err})
+    }
+  }
+  

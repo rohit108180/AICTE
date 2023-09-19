@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer} from "react";
 import { reducer } from "./reducer";
-import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT, GET_NOTIFICATIONS } from "./types";
+import { CLEAR_ALERT, SHOW_ALERT,  SETUP_USER_BEGINS, SETUP_USER_SUCCESS, SETUP_USER_ERROR, LOGOUT, TOGGLE_SIDEBAR, GET_ALL_POSTS, GET_MY_POSTS, START_LOADING, STOP_LOADING, UPDATE_PROFILE, TOGGLE_LIKE, ADD_COMMENT, GET_NOTIFICATIONS, GET_BOOKMARKS } from "./types";
 
 import axios from "axios";
 
@@ -10,6 +10,8 @@ export const AppContext = createContext();
 
 
 const user = JSON.parse(localStorage.getItem('user'));
+
+
 const token = localStorage.getItem('token');
 
 
@@ -23,6 +25,7 @@ export const initialState = {
     showSidebar : false,
     posts :[],
     notifications :[],
+    bookmarks: [],
 }
 
 
@@ -106,6 +109,35 @@ export const initialState = {
 
     const toggleSidebar = ()=>{
         dispatch({type:TOGGLE_SIDEBAR});
+    }
+
+    const addBookmark = async (id)=>{
+        try {
+            const res  = await axios.patch(`${BASE_URL}/Repos/bookmark/${id}`);
+            console.log(res.data);
+            
+            dispatch({type:UPDATE_PROFILE, payload: {user: res.data.user}})
+            displayAlert(res.data.msg, "success")
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+        }
+        catch (error) {
+            displayAlert("Some Error occurred : Unable to bookmark the post", "error")
+            console.log(error);
+        }
+    }
+
+    const getBookmarks = async()=>{
+        try {
+            const res  = await axios.get(`${BASE_URL}/Repos/bookmark`);
+            console.log(res.data);
+            dispatch({type:GET_BOOKMARKS, payload: {bookmarks: res.data.bookmarks}})
+
+            console.log(state.bookmarks)
+        }
+        catch (error) {
+            displayAlert("Some Error occurred : Unable to get bookmarks", "error")
+            console.log(error);
+        }
     }
 
     const loadAllPosts = async () => {
@@ -244,7 +276,9 @@ export const initialState = {
             newPost,
             updateProfile,
             postComment,
-            getNotifications
+            getNotifications,
+            addBookmark,
+            getBookmarks
             
 
         }}
