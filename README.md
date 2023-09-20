@@ -49,11 +49,24 @@ NOTE: This is only the prototype and it is meant to give a basic idea of how the
 
 ## Team Solution and product features
 1. **User Registration and Authentication**: Allow users (educators, curriculum developers, administrators) to create accounts. Provide a personalized dashboard for each user, displaying relevant information and options based on their role and preferences. Users can manage their profiles, track progress, and access saved curriculum designs.
-3. **Curriculum Design Tools**: Offer intuitive tools for curriculum design, including the ability to define course objectives, outline modules, specify learning outcomes, and create assessment methods. Users will be able to organize and structure curriculum content efficiently.
-4. **Resource Repository**: Maintain a repository of educational resources, such as textbooks, articles, videos, and interactive materials, categorized by subjects and topics. Users can search, access, and incorporate these resources into their curriculum designs.
-5. **Collaboration and Feedback**: Incorporated features like version control to enhance collaboration and streamline the review process.
-6. **Analytics and Reporting**: Provided analytics features to track and analyze the effectiveness of curriculum designs. This includes metrics like student performance, course completion rates, and assessment outcomes.
-<br/>
+    <img width="600" alt="image" src="https://github.com/rohit108180/AICTE/assets/72381583/68f62ac7-584e-4f8a-9394-b3f758b67341">
+    <img width="600" alt="image" src="https://github.com/rohit108180/AICTE/assets/72381583/4b5797b7-3b8e-47fa-8932-4390a46432ac">
+
+
+2. **Curriculum Design Tools**: Offer intuitive tools for curriculum design, including the ability to define course objectives, outline modules, specify learning outcomes, and create assessment methods. Users will be able to organize and structure curriculum content efficiently.
+<img width="600" alt="image" src="https://github.com/rohit108180/AICTE/assets/72381583/92f7e05c-ec04-42b8-8e40-1d9b6932c48b">
+<img width="600" alt="image" src="https://github.com/rohit108180/AICTE/assets/72381583/3da0febd-b769-4283-bc9b-075055a17e2b">
+
+
+3. **Resource Repository**: Maintain a repository of educational resources, such as textbooks, articles, videos, and interactive materials, categorized by subjects and topics. Users can search, access, and incorporate these resources into their curriculum designs.
+   <img width="600" alt="image" src="https://github.com/rohit108180/AICTE/assets/72381583/ae9d18b5-6be5-458a-b299-39671b383ad7">
+
+
+
+4. **Collaboration and Feedback**: Incorporated features like version control to enhance collaboration and streamline the review process.
+5. **Analytics and Reporting**: Provided analytics features to track and analyze the effectiveness of curriculum designs. This includes metrics like student performance, course completion rates, and assessment outcomes.
+<img width="600" alt="image" src="https://github.com/rohit108180/AICTE/assets/72381583/9dff30c4-a141-4a31-96df-70047f68c6de">
+
 
 ## To Do Features
 1. **Collaboration and Feedback**: Facilitate collaboration among users by allowing them to invite others to review and provide feedback on their curriculum designs. Incorporate features like commenting and document sharing.
