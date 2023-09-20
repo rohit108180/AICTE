@@ -1,4 +1,5 @@
-# AICTE Portal
+# Team Name : Code Wizards
+## AICTE Portal
 ### Problem Statement
 **Category**: SIH1464 <br/>
 **Problem Code**: SIH1464 <br/>
@@ -15,6 +16,23 @@ A unified portal for developing a model Curriculum for all the AICTE Approved In
 - Team Member 5: Siddhant Tohan
 <br/>
 
+## Table of Contents
+1. [Demo Video](#demo)
+2. [Presentation](#presentation)
+5. [Installation](#how-to-run-the-demo)
+6. [Data Flow Daigram](#data-flow-diagram-of-website)
+5. [Team Solutions](#team-solution-and-product-features)
+6. [Future scope](#to-do-features)
+7. [Tech Stack](#technologies-used)
+## Demo
+To get a better understanding of the InvoiceApp's functionality, you can watch our video presentation and explore the prototype.
+
+- [Prototype](https://www.veed.io/view/24c88ce7-7bc8-41ac-b1a0-9afd947838e6?panel=share)
+
+## Presentation
+To get a better understanding of the AICTE curriculum protal functionality, you can see our presentation and explore our noval idea.
+
+- [PPT Presentation](https://drive.google.com/file/d/1eUZBKKTEMPZHZPjteukkFz-YgkSMFUT4/view?usp=sharing)
 ## How to run the demo
 You can view the live link https://aicte-portal-frontend.onrender.com/ <br/>
 Or to run the project locally please follow the below steps
@@ -31,10 +49,10 @@ NOTE: This is only the prototype and it is meant to give a basic idea of how the
 
 ## Team Solution and product features
 1. **User Registration and Authentication**: Allow users (educators, curriculum developers, administrators) to create accounts. Provide a personalized dashboard for each user, displaying relevant information and options based on their role and preferences. Users can manage their profiles, track progress, and access saved curriculum designs.
-2. **Curriculum Design Tools**: Offer intuitive tools for curriculum design, including the ability to define course objectives, outline modules, specify learning outcomes, and create assessment methods. Users will be able to organize and structure curriculum content efficiently.
-3. **Resource Repository**: Maintain a repository of educational resources, such as textbooks, articles, videos, and interactive materials, categorized by subjects and topics. Users can search, access, and incorporate these resources into their curriculum designs.
-4. **Collaboration and Feedback**: Incorporated features like version control to enhance collaboration and streamline the review process.
-5. **Analytics and Reporting**: Provided analytics features to track and analyze the effectiveness of curriculum designs. This includes metrics like student performance, course completion rates, and assessment outcomes.
+3. **Curriculum Design Tools**: Offer intuitive tools for curriculum design, including the ability to define course objectives, outline modules, specify learning outcomes, and create assessment methods. Users will be able to organize and structure curriculum content efficiently.
+4. **Resource Repository**: Maintain a repository of educational resources, such as textbooks, articles, videos, and interactive materials, categorized by subjects and topics. Users can search, access, and incorporate these resources into their curriculum designs.
+5. **Collaboration and Feedback**: Incorporated features like version control to enhance collaboration and streamline the review process.
+6. **Analytics and Reporting**: Provided analytics features to track and analyze the effectiveness of curriculum designs. This includes metrics like student performance, course completion rates, and assessment outcomes.
 <br/>
 
 ## To Do Features
