@@ -7,13 +7,15 @@ import "./Landing.css";
 import useAuth from "../../MyHooks/useAuth";
 import { useAppcontext } from "../../Context/context/appContext";
 
+
+
 // import Card from '../../Components/Card'
 import CardComponent from "../../Components/Card";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography,CircularProgress } from "@mui/material";
 
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -22,7 +24,7 @@ import CardMedia from "@mui/material/CardMedia";
 
 export const Landing = () => {
   const { setLogin } = useAuth();
-  const { user, addBookmark } = useAppcontext();
+  const {loading, user, addBookmark , startLoading, stopLoading} = useAppcontext();
 
   useEffect(() => {
     if(user)getData();
@@ -100,8 +102,10 @@ export const Landing = () => {
 
 
   const getData = async () => {
+    
     const response = await axios.get("https://aicte-portal-backend.onrender.com/Repos/view/all");
     setRepos(response.data);
+    
   };
 
   const Versions = (Repo) => {
@@ -132,7 +136,8 @@ export const Landing = () => {
           <div className="borderline"> </div>
         </div>
         <div className="section-content">
-          {Repos.map((Repo) => {
+
+          { Repos.map((Repo) => {
             return (
               <Card
                 sx={{

@@ -118,7 +118,7 @@ module.exports.addBookmark = async (req,res)=>{
         console.log("olduser",old)
       const bookmarkId = old.bookmarks.find((id)=> id == req.params.id)
         console.log("bookmarkId",bookmarkId)
-      if(bookmarkId) return res.status(200).json({msg :"Already bookmarked"})
+      if(bookmarkId) return res.status(200).json({msg :"Already bookmarked", user :old})
       else{
         console.log("creating new bookmark")
         old.bookmarks.push(req.params.id);

@@ -10,9 +10,14 @@ const {getUser} = require("./Middleware/User")
 
 const app = express();
 
-// allow all origins
-// app.use(cors());
-app.use(cors({origin:'https://aicte-portal-frontend.onrender.com',credentials:true}));
+// allow  both http:localhost:3000 and http:localhost:5000 to access the resources along with 
+
+
+
+app.use(cors({origin:['https://aicte-portal-frontend.onrender.com',"http://localhost:3000"],credentials:true}));
+
+
+
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 

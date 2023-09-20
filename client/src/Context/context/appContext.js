@@ -118,7 +118,8 @@ export const initialState = {
             
             dispatch({type:UPDATE_PROFILE, payload: {user: res.data.user}})
             displayAlert(res.data.msg, "success")
-            localStorage.setItem('user', JSON.stringify(res.data.user));
+            console.log(res.data.user);
+            // if()localStorage.setItem('user', JSON.stringify(res.data.user));
         }
         catch (error) {
             displayAlert("Some Error occurred : Unable to bookmark the post", "error")
@@ -278,7 +279,9 @@ export const initialState = {
             postComment,
             getNotifications,
             addBookmark,
-            getBookmarks
+            getBookmarks,
+            startLoading,
+            stopLoading
             
 
         }}

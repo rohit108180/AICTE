@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import ModalForm from "./ModalForm";
 import options from "./FilterOptions";
+import { useAppcontext } from "../Context/context/appContext";
 const API_URL = "https://aicte-portal-backend.onrender.com";
 
 function Dropdown({ name, value, dropdownHandle, options }) {
@@ -77,6 +78,9 @@ function ResourceCard({ resource }) {
   const about = resource.About;
   const authors = resource.Authors;
   const department = resource.Department;
+  const degree = resource.Degree;
+  
+
   return (
     <Card
       variant="outlined"
@@ -92,7 +96,7 @@ function ResourceCard({ resource }) {
     >
       <CardContent>
         <Typography style={{ color: "#1E7C83" }} fontWeight="bold">
-          {department}
+          {department} | {degree}
         </Typography>
         <Typography variant="h4" fontWeight="bold">
           {name}
@@ -115,6 +119,8 @@ export default function Resources() {
   const [crOptions, setCrOptions] = useState(options.courseOptions);
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { user } = useAppcontext();
   // Utility
   const makeDropdownHandle = (name) => {
     return (event) => {
@@ -172,6 +178,7 @@ export default function Resources() {
           </Typography>
         </Box>
         <Box>
+          {user &&
           <Button
             onClick={handleOpen}
             variant="outlined"
@@ -179,6 +186,7 @@ export default function Resources() {
           >
             + Add New
           </Button>
+          }
         </Box>
       </Box>
       <Box

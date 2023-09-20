@@ -35,6 +35,9 @@ function App() {
       secondary: {
         main: "#DFECED", // Your secondary color
       },
+      success: {
+        main: "#4caf50",
+      },
     },
     typography: {
       fontFamily: "Arial, sans-serif", // Your preferred font family
@@ -52,11 +55,11 @@ function App() {
                 <Route path="/" element={<Landing />} />
                 <Route path="/login" element={<SingIn />} />
                 <Route path="/Register" element={<SignUp />} />
+                  <Route path="/Resources" element={<Resources />} />
 
                 <Route element={<ProtectedRoute />}>
                   <Route path="/Dashboard" element={<Repositories />} />
                   <Route path="/Profile" element={<Profile />} />
-                  <Route path="/Resources" element={<Resources />} />
                   <Route path="/Analytics" element={<Analytics />} />
                   <Route path="/:Title" element={<Main />} />
                   <Route path="/Edit/:Title" element={<TextEditor />} />

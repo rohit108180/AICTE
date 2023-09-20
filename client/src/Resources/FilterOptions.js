@@ -1,4 +1,5 @@
 const degreeOptions = [
+  "All",
   "BArch",
   "BA",
   "BAA",
@@ -20,6 +21,7 @@ const degreeOptions = [
 ];
 
 const courseOptions = [
+  "All",
   "Anthropology",
   "Archaeology",
   "Area Studies",
@@ -37,6 +39,7 @@ const courseOptions = [
 ];
 
 const departmentOptions = [
+  "All",
   "Department of Business Economics",
   "Department of East Asian Studies",
   "Department of Instrumental Music",

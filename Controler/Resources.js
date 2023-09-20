@@ -2,15 +2,13 @@ const Resource = require("../Models/Resources");
 
 module.exports.get = async (req, res) => {
   try {
-    const user = req.user;
-    if (!user) return await res.status(401).json("Unauthorized");
     const degree = req.query.degree;
     const department = req.query.department;
     const course = req.query.course;
     const filterObj = {};
-    if (degree) filterObj.Degree = degree;
-    if (department) filterObj.Department = department;
-    if (course) filterObj.Course = course;
+    if (degree && degree !="All") filterObj.Degree = degree;
+    if (department && department != "All") filterObj.Department = department;
+    if (course && course != "All") filterObj.Course = course;
     const resources = await Resource.find(filterObj);
     await res.status(200).json(resources);
   } catch (err) {
